@@ -15,6 +15,8 @@
 		0A336C211B5F66B500E21DAA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C201B5F66B500E21DAA /* Images.xcassets */; };
 		0A336C241B5F66B500E21DAA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C221B5F66B500E21DAA /* LaunchScreen.xib */; };
 		0A336C301B5F66B500E21DAA /* LocationerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C2F1B5F66B500E21DAA /* LocationerTests.swift */; };
+		0A336C421B5F745900E21DAA /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C411B5F745900E21DAA /* Location.m */; };
+		0A336C451B5F745A00E21DAA /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C441B5F745A00E21DAA /* Tag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,11 @@
 		0A336C291B5F66B500E21DAA /* LocationerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A336C2E1B5F66B500E21DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A336C2F1B5F66B500E21DAA /* LocationerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationerTests.swift; sourceTree = "<group>"; };
+		0A336C391B5F6F4900E21DAA /* Locationer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Locationer-Bridging-Header.h"; sourceTree = "<group>"; };
+		0A336C401B5F745900E21DAA /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		0A336C411B5F745900E21DAA /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		0A336C431B5F745A00E21DAA /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		0A336C441B5F745A00E21DAA /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +96,11 @@
 				0A336C221B5F66B500E21DAA /* LaunchScreen.xib */,
 				0A336C161B5F66B500E21DAA /* Locationer.xcdatamodeld */,
 				0A336C121B5F66B500E21DAA /* Supporting Files */,
+				0A336C391B5F6F4900E21DAA /* Locationer-Bridging-Header.h */,
+				0A336C431B5F745A00E21DAA /* Tag.h */,
+				0A336C441B5F745A00E21DAA /* Tag.m */,
+				0A336C401B5F745900E21DAA /* Location.h */,
+				0A336C411B5F745900E21DAA /* Location.m */,
 			);
 			path = Locationer;
 			sourceTree = "<group>";
@@ -218,7 +230,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A336C451B5F745A00E21DAA /* Tag.m in Sources */,
 				0A336C151B5F66B500E21DAA /* AppDelegate.swift in Sources */,
+				0A336C421B5F745900E21DAA /* Location.m in Sources */,
 				0A336C181B5F66B500E21DAA /* Locationer.xcdatamodeld in Sources */,
 				0A336C1A1B5F66B500E21DAA /* MasterViewController.swift in Sources */,
 				0A336C1C1B5F66B500E21DAA /* DetailViewController.swift in Sources */,
@@ -350,9 +364,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Locationer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Locationer/Locationer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -360,9 +377,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Locationer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Locationer/Locationer-Bridging-Header.h";
 			};
 			name = Release;
 		};
