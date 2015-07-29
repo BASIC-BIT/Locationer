@@ -13,6 +13,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    
+//    override func viewDidAppear(animated: Bool) {
+//        let loc1 : Location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: self.managedObjectContext!) as! Location
+//        loc1.name = "Parking Spot"
+//        loc1.desc = "At Work"
+//        loc1.isFavorite = true
+//        loc1.lat = 1
+//        loc1.lon = 1
+//        loc1.dateAdded = NSDate()
+//        self._saveContext()
+//    }
 
 
     override func awakeFromNib() {
@@ -40,6 +51,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func _saveContext(){
+        
+        // Save the context.
+        var error: NSError? = nil
+        if self.fetchedResultsController.managedObjectContext.hasChanges && !self.fetchedResultsController.managedObjectContext.save(&error) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //println("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+    }
 
     func insertNewObject(sender: AnyObject) {
         let context = self.fetchedResultsController.managedObjectContext
@@ -48,7 +71,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
              
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue(NSDate(), forKey: "timeStamp")
+        newManagedObject.setValue(NSDate(), forKey: "Location")
              
         // Save the context.
         var error: NSError? = nil
@@ -86,8 +109,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-        self.configureCell(cell, atIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath) as! UITableViewCell
+        self._configureCell(cell, atIndexPath: indexPath)
         return cell
     }
 
@@ -111,9 +134,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
-        cell.textLabel!.text = object.valueForKey("timeStamp")!.description
+    func _configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+        cell.textLabel!.text = object.name
+        cell.detailTextLabel!.text = object.isFavorite as! Bool ? "Is Favorite" : "Is Not Favorite"
     }
 
     // MARK: - Fetched results controller
@@ -125,14 +149,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext: self.managedObjectContext!)
+        let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
         let sortDescriptors = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -177,7 +201,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .Delete:
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             case .Update:
-                self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+                self._configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
             case .Move:
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

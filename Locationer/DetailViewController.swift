@@ -10,7 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet weak var descLabel : UILabel!
 
 
     var detailItem: AnyObject? {
@@ -23,8 +24,11 @@ class DetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail: AnyObject = self.detailItem {
-            if let label = self.detailDescriptionLabel {
-                label.text = detail.valueForKey("timeStamp")!.description
+            if let nl = self.nameLabel {
+                nl.text = detail.valueForKey("name")!.description
+            }
+            if let dl = self.descLabel {
+                dl.text = detail.valueForKey("desc")!.description
             }
         }
     }
