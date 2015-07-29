@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  LocationDetailViewController.swift
 //  Locationer
 //
 //  Created by CSSE Department on 7/21/15.
@@ -8,28 +8,24 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class LocationDetailViewController: UIViewController {
 
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var descLabel : UILabel!
+    @IBOutlet weak var isFavLabel: UILabel!
+    var location : Location?
 
-
-    var detailItem: AnyObject? {
-        didSet {
-            // Update the view.
-            self.configureView()
-        }
-    }
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail: AnyObject = self.detailItem {
             if let nl = self.nameLabel {
-                nl.text = detail.valueForKey("name")!.description
+                nl.text = location!.name
             }
             if let dl = self.descLabel {
-                dl.text = detail.valueForKey("desc")!.description
+                dl.text = location!.desc
             }
+        if let fl = self.isFavLabel {
+            fl.text = location?.isFavorite.boolValue.description
         }
     }
 

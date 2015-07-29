@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Location" representedClassName="Location" syncable="YES">
+    <entity name="Location" representedClassName="Locationer.Location" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -9,12 +9,12 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tags" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="location" inverseEntity="Tag" syncable="YES"/>
     </entity>
-    <entity name="Tag" representedClassName="Tag" syncable="YES">
+    <entity name="Tag" representedClassName="Locationer.Tag" syncable="YES">
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="tags" inverseEntity="Location" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Location" positionX="1332" positionY="-1345" width="128" height="148"/>
+        <element name="Location" positionX="1332" positionY="-1345" width="128" height="150"/>
         <element name="Tag" positionX="1521" positionY="-1170" width="128" height="75"/>
     </elements>
 </model>
