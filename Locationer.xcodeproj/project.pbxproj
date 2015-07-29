@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		0A336C151B5F66B500E21DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C141B5F66B500E21DAA /* AppDelegate.swift */; };
 		0A336C181B5F66B500E21DAA /* Locationer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C161B5F66B500E21DAA /* Locationer.xcdatamodeld */; };
-		0A336C1A1B5F66B500E21DAA /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C191B5F66B500E21DAA /* MasterViewController.swift */; };
-		0A336C1C1B5F66B500E21DAA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C1B1B5F66B500E21DAA /* DetailViewController.swift */; };
+		0A336C1A1B5F66B500E21DAA /* MapDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C191B5F66B500E21DAA /* MapDisplayViewController.swift */; };
+		0A336C1C1B5F66B500E21DAA /* SavedLocationDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C1B1B5F66B500E21DAA /* SavedLocationDisplayViewController.swift */; };
 		0A336C1F1B5F66B500E21DAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C1D1B5F66B500E21DAA /* Main.storyboard */; };
 		0A336C211B5F66B500E21DAA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C201B5F66B500E21DAA /* Images.xcassets */; };
 		0A336C241B5F66B500E21DAA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C221B5F66B500E21DAA /* LaunchScreen.xib */; };
 		0A336C301B5F66B500E21DAA /* LocationerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C2F1B5F66B500E21DAA /* LocationerTests.swift */; };
-		0A336C421B5F745900E21DAA /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C411B5F745900E21DAA /* Location.m */; };
-		0A336C451B5F745A00E21DAA /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C441B5F745A00E21DAA /* Tag.m */; };
+		0AD3A5681B687B75003D702C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A5671B687B75003D702C /* Location.swift */; };
+		0AD3A56A1B687B76003D702C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A5691B687B76003D702C /* Tag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,19 +34,16 @@
 		0A336C131B5F66B500E21DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A336C141B5F66B500E21DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A336C171B5F66B500E21DAA /* Locationer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Locationer.xcdatamodel; sourceTree = "<group>"; };
-		0A336C191B5F66B500E21DAA /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		0A336C1B1B5F66B500E21DAA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		0A336C191B5F66B500E21DAA /* MapDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDisplayViewController.swift; sourceTree = "<group>"; };
+		0A336C1B1B5F66B500E21DAA /* SavedLocationDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationDisplayViewController.swift; sourceTree = "<group>"; };
 		0A336C1E1B5F66B500E21DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A336C201B5F66B500E21DAA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0A336C231B5F66B500E21DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0A336C291B5F66B500E21DAA /* LocationerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A336C2E1B5F66B500E21DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A336C2F1B5F66B500E21DAA /* LocationerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationerTests.swift; sourceTree = "<group>"; };
-		0A336C391B5F6F4900E21DAA /* Locationer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Locationer-Bridging-Header.h"; sourceTree = "<group>"; };
-		0A336C401B5F745900E21DAA /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		0A336C411B5F745900E21DAA /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		0A336C431B5F745A00E21DAA /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		0A336C441B5F745A00E21DAA /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		0AD3A5671B687B75003D702C /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0AD3A5691B687B76003D702C /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,18 +86,15 @@
 			isa = PBXGroup;
 			children = (
 				0A336C141B5F66B500E21DAA /* AppDelegate.swift */,
-				0A336C191B5F66B500E21DAA /* MasterViewController.swift */,
-				0A336C1B1B5F66B500E21DAA /* DetailViewController.swift */,
+				0A336C191B5F66B500E21DAA /* MapDisplayViewController.swift */,
+				0A336C1B1B5F66B500E21DAA /* SavedLocationDisplayViewController.swift */,
 				0A336C1D1B5F66B500E21DAA /* Main.storyboard */,
 				0A336C201B5F66B500E21DAA /* Images.xcassets */,
 				0A336C221B5F66B500E21DAA /* LaunchScreen.xib */,
 				0A336C161B5F66B500E21DAA /* Locationer.xcdatamodeld */,
 				0A336C121B5F66B500E21DAA /* Supporting Files */,
-				0A336C391B5F6F4900E21DAA /* Locationer-Bridging-Header.h */,
-				0A336C431B5F745A00E21DAA /* Tag.h */,
-				0A336C441B5F745A00E21DAA /* Tag.m */,
-				0A336C401B5F745900E21DAA /* Location.h */,
-				0A336C411B5F745900E21DAA /* Location.m */,
+				0AD3A5691B687B76003D702C /* Tag.swift */,
+				0AD3A5671B687B75003D702C /* Location.swift */,
 			);
 			path = Locationer;
 			sourceTree = "<group>";
@@ -230,12 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A336C451B5F745A00E21DAA /* Tag.m in Sources */,
+				0AD3A56A1B687B76003D702C /* Tag.swift in Sources */,
 				0A336C151B5F66B500E21DAA /* AppDelegate.swift in Sources */,
-				0A336C421B5F745900E21DAA /* Location.m in Sources */,
 				0A336C181B5F66B500E21DAA /* Locationer.xcdatamodeld in Sources */,
-				0A336C1A1B5F66B500E21DAA /* MasterViewController.swift in Sources */,
-				0A336C1C1B5F66B500E21DAA /* DetailViewController.swift in Sources */,
+				0AD3A5681B687B75003D702C /* Location.swift in Sources */,
+				0A336C1A1B5F66B500E21DAA /* MapDisplayViewController.swift in Sources */,
+				0A336C1C1B5F66B500E21DAA /* SavedLocationDisplayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +432,7 @@
 				0A336C351B5F66B500E21DAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A336C361B5F66B500E21DAA /* Build configuration list for PBXNativeTarget "LocationerTests" */ = {
 			isa = XCConfigurationList;
@@ -446,6 +441,7 @@
 				0A336C381B5F66B500E21DAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
