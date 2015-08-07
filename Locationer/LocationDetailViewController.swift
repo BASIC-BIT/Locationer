@@ -7,14 +7,18 @@
 //
 
 import UIKit
-
+import GoogleMaps
 class LocationDetailViewController: UIViewController {
 
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var descLabel : UILabel!
     @IBOutlet weak var isFavLabel: UILabel!
     var location : Location?
+    let kShowOnMapFromDetailSegueIdentifier = "showOnMapFromDetailSegueIdentifier"
 
+    @IBAction func pressedGoToOnMap(sender: AnyObject) {
+        self.performSegueWithIdentifier(kShowOnMapFromDetailSegueIdentifier, sender: self)
+    }
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -25,7 +29,14 @@ class LocationDetailViewController: UIViewController {
                 dl.text = location!.desc
             }
         if let fl = self.isFavLabel {
-            fl.text = location?.isFavorite.boolValue.description
+//            fl.text = location?.isFavorite.boolValue.description
+            let trueText = "This location is a favorite"
+            let falseText = "This location is not a favorite"
+            if((location?.isFavorite.boolValue) != nil){
+                fl.text = trueText
+            } else {
+                fl.text = falseText
+            }
         }
     }
 
@@ -35,9 +46,10 @@ class LocationDetailViewController: UIViewController {
         self.configureView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == kShowOnMapFromDetailSegueIdentifier){
+            (segue.destinationViewController as! MapDisplayViewController).detailLocationToAppearAt = CLLocationCoordinate2D(latitude: location!.lat.doubleValue, longitude: location!.lon.doubleValue)
+        }
     }
 
 

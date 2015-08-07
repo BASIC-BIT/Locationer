@@ -18,6 +18,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     var lastPressedMarker : GMSMarker? = nil
     var quickSaveMarker : GMSMarker? = nil
     var quickSaveMarkerIsFixed = false
+    var detailLocationToAppearAt : CLLocationCoordinate2D? = nil
 
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -36,20 +37,30 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         self.goToLastSavedButton.titleLabel?.numberOfLines = 0
 
         self.goToLastSavedButton.titleLabel?.text = "go to \n last saved"
-        var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464,
+        if let locationToStart = detailLocationToAppearAt{
+            let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
+            self.mapView.camera = camera
+            self.detailLocationToAppearAt = nil
+        } else {
+            var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464,
             longitude: -87.324142, zoom: 15)
-        self.mapView.camera = roseHulman
+            self.mapView.camera = roseHulman
+        }
         self.mapView.delegate = self
-
+        println("Void did load")
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        self.mapView.clear()
+//        if let locationToStart = detailLocationToAppearAt{
+//            let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
+//            self.mapView.camera = camera
+//            self.detailLocationToAppearAt = nil
+//        }
         _markers = nil
         self.mapView.clear()
         for marker in markers{
-            println("marker title \(marker.title)")
+//            println("marker title \(marker.title)")
             if marker.map == nil{
                 marker.map = self.mapView
             }
