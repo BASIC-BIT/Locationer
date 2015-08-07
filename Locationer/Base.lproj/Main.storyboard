@@ -72,21 +72,44 @@
                                     <action selector="pressedGoToOnMap:" destination="JEX-9P-axG" eventType="touchUpInside" id="3A8-zt-Xco"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffJ-yi-V56">
+                                <rect key="frame" x="225" y="417" width="150" height="30"/>
+                                <state key="normal" title="Open in Google Maps">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedOpenInGoogle:" destination="JEX-9P-axG" eventType="touchUpInside" id="FtR-bX-FuV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uW0-XP-u9R">
+                                <rect key="frame" x="554" y="64" width="30" height="30"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedEditButton:" destination="JEX-9P-axG" eventType="touchUpInside" id="j9E-MC-6YM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gVI-xU-xiu" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="1wW-Xp-wsC"/>
                             <constraint firstAttribute="centerY" secondItem="kDJ-8n-UwQ" secondAttribute="centerY" constant="-60.5" id="5q6-7O-h85"/>
                             <constraint firstAttribute="centerX" secondItem="kDJ-8n-UwQ" secondAttribute="centerX" id="5zF-II-am7"/>
+                            <constraint firstItem="uW0-XP-u9R" firstAttribute="top" secondItem="Dgq-JJ-HGn" secondAttribute="bottom" constant="9" id="9gZ-sA-4En"/>
                             <constraint firstAttribute="centerX" secondItem="j8x-zn-nN5" secondAttribute="centerX" id="C3T-JB-JBl"/>
+                            <constraint firstItem="ffJ-yi-V56" firstAttribute="top" secondItem="j8x-zn-nN5" secondAttribute="bottom" constant="8" id="CWp-Cv-uvk"/>
+                            <constraint firstItem="ffJ-yi-V56" firstAttribute="top" secondItem="kDJ-8n-UwQ" secondAttribute="bottom" constant="8" id="HRc-Zd-I9p"/>
                             <constraint firstItem="c4i-A5-KTo" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="199" id="Hg9-Ly-kYf"/>
                             <constraint firstItem="gVI-xU-xiu" firstAttribute="top" secondItem="BMj-It-pMG" secondAttribute="bottom" constant="8" id="ICt-nv-aJ7"/>
                             <constraint firstAttribute="centerX" secondItem="BMj-It-pMG" secondAttribute="centerX" constant="-0.5" id="KWr-3y-UpL"/>
+                            <constraint firstItem="uW0-XP-u9R" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="Kpt-3e-OZb"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="c4i-A5-KTo" secondAttribute="bottom" constant="8" id="MfI-wn-gvi"/>
                             <constraint firstItem="BMj-It-pMG" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="8" id="Q1S-L2-E0G"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="8" id="RWA-qh-lDx"/>
                             <constraint firstItem="j8x-zn-nN5" firstAttribute="top" secondItem="kDJ-8n-UwQ" secondAttribute="bottom" constant="8" id="Ub2-Qw-vCf"/>
                             <constraint firstAttribute="centerX" secondItem="gVI-xU-xiu" secondAttribute="centerX" id="XJA-Vr-5fV"/>
+                            <constraint firstAttribute="centerX" secondItem="ffJ-yi-V56" secondAttribute="centerX" id="bdM-Ep-RDr"/>
                             <constraint firstAttribute="centerX" secondItem="0XM-y9-sOw" secondAttribute="centerX" id="fvu-WD-kMy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="8" id="gDG-9o-6UC"/>
                             <constraint firstItem="gVI-xU-xiu" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="hZk-la-oZB"/>
@@ -95,6 +118,11 @@
                             <constraint firstItem="Dgq-JJ-HGn" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="tz5-aw-Z4J"/>
                             <constraint firstAttribute="trailing" secondItem="Dgq-JJ-HGn" secondAttribute="trailing" id="xcX-tQ-ojO"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="HRc-Zd-I9p"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Location Detail" id="mOI-FS-AaM"/>
@@ -103,6 +131,7 @@
                         <outlet property="isFavLabel" destination="kDJ-8n-UwQ" id="bx2-67-7wJ"/>
                         <outlet property="nameLabel" destination="0XM-y9-sOw" id="32D-t1-KUD"/>
                         <segue destination="7dX-Ng-ogN" kind="show" identifier="showOnMapFromDetailSegueIdentifier" id="blQ-vy-yQP"/>
+                        <segue destination="EyR-KB-meV" kind="presentation" identifier="toEditLocationSegueIdentifier" id="nzb-pA-mxi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -417,5 +446,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="blQ-vy-yQP"/>
+        <segue reference="nzb-pA-mxi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -48,6 +48,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         }
         self.mapView.delegate = self
         println("Void did load")
+
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(animated: Bool) {

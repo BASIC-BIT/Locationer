@@ -15,9 +15,36 @@ class LocationDetailViewController: UIViewController {
     @IBOutlet weak var isFavLabel: UILabel!
     var location : Location?
     let kShowOnMapFromDetailSegueIdentifier = "showOnMapFromDetailSegueIdentifier"
+    let kToEditLocationSegueIdentifier = "toEditLocationSegueIdentifier"
 
     @IBAction func pressedGoToOnMap(sender: AnyObject) {
         self.performSegueWithIdentifier(kShowOnMapFromDetailSegueIdentifier, sender: self)
+    }
+    @IBAction func pressedOpenInGoogle(sender: AnyObject) {
+//        UIApplication.sharedApplication().openURL(NSURL(string: "http://maps.google.com/maps?q=London")!)
+//        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
+//            UIApplication.sharedApplication().openURL(NSURL(string:
+//                "comgooglemaps://?center=40.765819,-73.975866&zoom=14")!)
+//        } else {
+//            NSLog("Can't use comgooglemaps://");
+//        }
+//         opens to location but without marker... not ideal
+//        var urlToSend = "https://www.google.com/maps/@"
+        //TODO: Add reverse geocoding so that you can with directions to the location
+        var urlToSend = "http://maps.apple.com/?ll="
+        urlToSend += self.location!.lat.stringValue
+        urlToSend += ","
+        urlToSend += self.location!.lon.stringValue
+//        urlToSend += ",18z"
+        urlToSend += "z=18"
+        UIApplication.sharedApplication().openURL(NSURL(string: urlToSend)!)
+        
+//        UIApplication.sharedApplication().openURL(NSURL(string: "http://maps.apple.com/?q=cupertino")!)
+        
+
+    }
+    @IBAction func pressedEditButton(sender: AnyObject) {
+        self.performSegueWithIdentifier(kToEditLocationSegueIdentifier, sender: self)
     }
 
     func configureView() {
@@ -44,11 +71,23 @@ class LocationDetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.configureView()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == kShowOnMapFromDetailSegueIdentifier){
             (segue.destinationViewController as! MapDisplayViewController).detailLocationToAppearAt = CLLocationCoordinate2D(latitude: location!.lat.doubleValue, longitude: location!.lon.doubleValue)
+        }
+        if(segue.identifier == kToEditLocationSegueIdentifier){
+            let destination = segue.destinationViewController as! EditLocationViewController
+            destination.location = self.location
+            destination.isEditMode = true
+
+            
         }
     }
 
