@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import GoogleMaps
 class EditLocationViewController: UIViewController {
     var location : Location?
+    var marker : GMSMarker?
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var descField: UITextField!
     @IBOutlet weak var tagsField: UITextField!
@@ -20,8 +22,8 @@ class EditLocationViewController: UIViewController {
         loc1.name = nameField.text
         loc1.desc = descField.text
         loc1.isFavorite = NSNumber(bool: isFavoriteSwitch.on)
-        loc1.lat = 1
-        loc1.lon = 1
+        loc1.lat = marker!.position.latitude
+        loc1.lon = marker!.position.longitude
         loc1.dateAdded = NSDate()
         CoreDataUtils.saveContext()
         self.dismissViewControllerAnimated(true, completion: nil)

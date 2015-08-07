@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import GoogleMaps
+
+let ProjectAPIKey = "AIzaSyDyVp1Ev53gHM0q8iLdGFGM4hTv4vDXugo"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -28,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = self.window!.rootViewController as! UINavigationController
         let mapController = navigationController.topViewController as! MapDisplayViewController
         mapController.managedObjectContext = self.managedObjectContext
+        
+        // For google maps SDK
+        GMSServices.provideAPIKey(ProjectAPIKey)
         return true
     }
 

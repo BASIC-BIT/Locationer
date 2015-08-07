@@ -54,7 +54,6 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     func _saveContext(){
-        
         // Save the context.
         var error: NSError? = nil
         if self.fetchedResultsController.managedObjectContext.hasChanges && !self.fetchedResultsController.managedObjectContext.save(&error) {
@@ -171,6 +170,7 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
         
         return _fetchedResultsController!
     }    
+
     var _fetchedResultsController: NSFetchedResultsController? = nil
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {

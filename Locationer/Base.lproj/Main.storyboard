@@ -167,57 +167,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AY-XG-z6b" userLabel="Button bar">
-                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="530" width="600" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLW-MX-wVf">
-                                        <rect key="frame" x="0.0" y="35" width="150" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
                                         <state key="normal" title="List">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="7bK-jq-Zjz" kind="show" identifier="" id="y48-iv-JSJ"/>
+                                            <action selector="pressedListButton:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="ilq-P4-eKs"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7J-Lp-YFg">
-                                        <rect key="frame" x="150" y="35" width="150" height="30"/>
+                                        <rect key="frame" x="150" y="0.0" width="150" height="70"/>
                                         <state key="normal" title="save">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="EyR-KB-meV" kind="presentation" id="I1g-Wq-Ts4"/>
+                                            <action selector="pressedSaveButton:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="72Y-Ax-odz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQQ-aS-HNg">
-                                        <rect key="frame" x="300" y="35" width="150" height="30"/>
+                                        <rect key="frame" x="300" y="0.0" width="150" height="70"/>
                                         <state key="normal" title="quick save">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pressedQuickSave:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="BpL-Lc-it6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzT-Jc-Gh1">
-                                        <rect key="frame" x="450" y="35" width="150" height="30"/>
+                                        <rect key="frame" x="450" y="0.0" width="150" height="70"/>
                                         <state key="normal" title="go to last saved">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pressedGoToLastSaved:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="rMm-7p-0ax"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.59835493564605713" green="0.59833705425262451" blue="0.59834718704223633" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="width" secondItem="gLW-MX-wVf" secondAttribute="width" id="2Oy-Wj-2hc"/>
+                                    <constraint firstAttribute="bottom" secondItem="gLW-MX-wVf" secondAttribute="bottom" id="5fX-k2-6gc"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="leading" secondItem="i7J-Lp-YFg" secondAttribute="trailing" id="9iO-nf-Uou"/>
                                     <constraint firstItem="HzT-Jc-Gh1" firstAttribute="leading" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="9k0-P6-nl1"/>
-                                    <constraint firstAttribute="height" constant="100" id="B8z-0O-kcm"/>
+                                    <constraint firstAttribute="height" constant="70" id="B8z-0O-kcm"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="leading" secondItem="i7J-Lp-YFg" secondAttribute="trailing" id="Czr-zL-ETf"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="width" secondItem="HzT-Jc-Gh1" secondAttribute="width" id="ESo-cE-2Se"/>
                                     <constraint firstItem="i7J-Lp-YFg" firstAttribute="leading" secondItem="gLW-MX-wVf" secondAttribute="trailing" id="JMM-54-rwZ"/>
                                     <constraint firstItem="HzT-Jc-Gh1" firstAttribute="leading" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="LHt-Fm-8lo"/>
+                                    <constraint firstItem="QQQ-aS-HNg" firstAttribute="height" secondItem="i7J-Lp-YFg" secondAttribute="height" id="Pft-pU-NT0"/>
                                     <constraint firstAttribute="trailing" secondItem="HzT-Jc-Gh1" secondAttribute="trailing" id="QhP-uj-sR9"/>
                                     <constraint firstAttribute="trailing" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="RDf-sw-L52"/>
+                                    <constraint firstItem="QQQ-aS-HNg" firstAttribute="height" secondItem="gLW-MX-wVf" secondAttribute="height" id="Txr-CU-JKf"/>
                                     <constraint firstItem="HzT-Jc-Gh1" firstAttribute="leading" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="WUZ-f6-xOe"/>
                                     <constraint firstAttribute="centerY" secondItem="i7J-Lp-YFg" secondAttribute="centerY" id="Ypk-Sb-VwK"/>
                                     <constraint firstAttribute="centerY" secondItem="gLW-MX-wVf" secondAttribute="centerY" id="a9Y-lI-lkN"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="width" secondItem="i7J-Lp-YFg" secondAttribute="width" id="bJ3-JB-Oio"/>
+                                    <constraint firstItem="QQQ-aS-HNg" firstAttribute="height" secondItem="HzT-Jc-Gh1" secondAttribute="height" id="dNc-TN-7aT"/>
                                     <constraint firstItem="gLW-MX-wVf" firstAttribute="leading" secondItem="9AY-XG-z6b" secondAttribute="leading" id="fwe-Kr-nBR"/>
                                     <constraint firstAttribute="centerY" secondItem="QQQ-aS-HNg" secondAttribute="centerY" id="gBh-ae-9ay"/>
+                                    <constraint firstItem="gLW-MX-wVf" firstAttribute="top" secondItem="9AY-XG-z6b" secondAttribute="top" id="kui-SG-wGf"/>
                                     <constraint firstAttribute="centerY" secondItem="i7J-Lp-YFg" secondAttribute="centerY" id="ni8-6d-jse"/>
                                     <constraint firstAttribute="centerY" secondItem="HzT-Jc-Gh1" secondAttribute="centerY" id="wv5-9B-7li"/>
                                 </constraints>
@@ -231,9 +242,9 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EO-hr-rAX" userLabel="Map View">
-                                <rect key="frame" x="0.0" y="64" width="600" height="436"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.47044163942337036" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EO-hr-rAX" userLabel="Map View" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="466"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -253,7 +264,19 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="f6W-Md-DZh"/>
+                    <navigationItem key="navigationItem" title="Map" id="f6W-Md-DZh">
+                        <barButtonItem key="rightBarButtonItem" image="ic_menu_bars.png" id="imu-n9-hbT">
+                            <connections>
+                                <action selector="pressedMenuButton:" destination="7dX-Ng-ogN" id="0b1-3k-SIs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="goToLastSavedButton" destination="HzT-Jc-Gh1" id="UPe-n2-pKt"/>
+                        <outlet property="mapView" destination="2EO-hr-rAX" id="R7i-fg-Njm"/>
+                        <segue destination="EyR-KB-meV" kind="presentation" identifier="saveSegueIdentifier" id="H9u-Zy-Fl2"/>
+                        <segue destination="7bK-jq-Zjz" kind="show" identifier="tableSegueIdentifier" id="PC8-9y-KUn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0B5-wj-O7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -280,7 +303,7 @@
                                     <action selector="pressedDismissButton:" destination="EyR-KB-meV" eventType="touchUpInside" id="9lf-fd-xqc"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RDw-Sj-Z6a">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RDw-Sj-Z6a">
                                 <rect key="frame" x="175" y="123" width="250" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7vb-uc-ayr"/>
@@ -385,4 +408,7 @@
             <point key="canvasLocation" x="-1608" y="-288"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_menu_bars.png" width="20" height="15"/>
+    </resources>
 </document>
