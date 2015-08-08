@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F5D1F079-1532-4B64-9FD0-71B0FB54393B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Locationer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BA93B8C5F6EAE90B68C55FCF5854ED5573804E63</key>
+		<string>https://github.com/Stevenator1/Locationer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Locationer/Locationer.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BA93B8C5F6EAE90B68C55FCF5854ED5573804E63</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Stevenator1/Locationer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BA93B8C5F6EAE90B68C55FCF5854ED5573804E63</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BA93B8C5F6EAE90B68C55FCF5854ED5573804E63</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Locationer</string>
+		</dict>
+	</array>
+</dict>
+</plist>
