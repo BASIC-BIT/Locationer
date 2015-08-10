@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import GoogleMaps
-class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate {
+class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate , UITextFieldDelegate {
     var location : Location?
     var marker : GMSMarker?
     var isEditMode = false
@@ -17,7 +17,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     @IBOutlet weak var descField: UITextField!
     @IBOutlet weak var tagsField: UITextField!
 
-    @IBOutlet weak var tagsTableView: UITableView!
+    @IBOutlet weak var tagsTableView: TagsTableView!
     @IBAction func pressedAddTag(sender: AnyObject) {
         
         
@@ -27,6 +27,10 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     @IBOutlet weak var isFavoriteSwitch: UISwitch!
     @IBAction func pressedDismissButton(sender: AnyObject) {
@@ -60,9 +64,16 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
             self.isFavoriteSwitch.on = self.location!.isFavorite.boolValue
         }
         
-        tagsTableView.number
-    
-        // Do any additional setup after loading the view.
+        
+        var tap = UITapGestureRecognizer(target: self, action: "endEditing")
+        self.view.addGestureRecognizer(tap)
+        self.nameField.becomeFirstResponder()
+        self.nameField.delegate = self
+        self.descField.delegate = self
+        self.tagsTableView.editLocationViewController = self
+    }
+    func endEditing() {
+        self.view.endEditing(true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

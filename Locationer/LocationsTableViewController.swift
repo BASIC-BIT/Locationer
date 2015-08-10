@@ -15,6 +15,8 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
     var locationDetailViewController: LocationDetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
+    let klocationCellIdentifier = "LocationCellIdentifier"
+    
     override func viewDidAppear(animated: Bool) {
 //        let loc1 : Location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Location
 //        loc1.name = "Parking Spot"
@@ -102,7 +104,7 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(klocationCellIdentifier, forIndexPath: indexPath) as! LocationTableViewCell
         self._configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -130,10 +132,9 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
         return 60
     }
 
-    func _configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Location
-        cell.textLabel!.text = object.name
-        cell.detailTextLabel!.text = object.isFavorite as! Bool ? "Is Favorite" : "Is Not Favorite"
+    func _configureCell(cell: LocationTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let cellLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+        cell.configureCellForLocation(cellLocation)
     }
 
     // MARK: - Fetched results controller
@@ -152,10 +153,11 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
-        let sortDescriptors = [sortDescriptor]
+        let sortDescriptor = NSSortDescriptor(key: "isFavorite", ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptors = [sortDescriptor, sortDescriptor2]
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
@@ -198,7 +200,8 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
             case .Delete:
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             case .Update:
-                self._configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+                let locationCell = tableView.cellForRowAtIndexPath(indexPath!)! as! LocationTableViewCell
+                self._configureCell(locationCell, atIndexPath: indexPath!)
             case .Move:
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

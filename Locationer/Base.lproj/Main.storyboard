@@ -147,30 +147,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationCell" textLabel="Arm-wq-HPj" detailTextLabel="GAc-rc-LN7" style="IBUITableViewCellStyleSubtitle" id="WCw-Qf-5nD">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationCellIdentifier" id="WCw-Qf-5nD" customClass="LocationTableViewCell" customModule="Locationer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16j-eD-kbg">
+                                            <rect key="frame" x="8" y="11" width="46" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GAc-rc-LN7">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcQ-I9-UaQ">
+                                            <rect key="frame" x="562" y="7" width="30" height="30"/>
+                                            <state key="normal" title="Star">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="pressedStarButton:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="tQz-L6-nOH"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shg-Qt-TXr">
+                                            <rect key="frame" x="535" y="11" width="27" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="gcQ-I9-UaQ" secondAttribute="bottom" constant="-2" id="0w4-tY-ecQ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="16j-eD-kbg" secondAttribute="bottom" constant="3" id="Bn1-3k-R2F"/>
+                                        <constraint firstItem="gcQ-I9-UaQ" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="topMargin" constant="-1" id="Jvt-fH-gye"/>
+                                        <constraint firstItem="gcQ-I9-UaQ" firstAttribute="trailing" secondItem="37f-cq-3Eg" secondAttribute="trailingMargin" id="NIO-wZ-FEp"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="shg-Qt-TXr" secondAttribute="bottom" constant="3" id="dYX-lb-slb"/>
+                                        <constraint firstItem="16j-eD-kbg" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="topMargin" constant="3" id="ejA-XT-IoI"/>
+                                        <constraint firstItem="16j-eD-kbg" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" id="h9B-sw-7sh"/>
+                                        <constraint firstItem="shg-Qt-TXr" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="topMargin" constant="3" id="qW8-o8-v43"/>
+                                        <constraint firstItem="gcQ-I9-UaQ" firstAttribute="leading" secondItem="shg-Qt-TXr" secondAttribute="trailing" id="rJc-OD-2OF"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="nameLabel" destination="16j-eD-kbg" id="gjW-WV-xuT"/>
+                                    <outlet property="starredButton" destination="gcQ-I9-UaQ" id="m0R-CP-TcX"/>
+                                    <outlet property="tagLabel" destination="shg-Qt-TXr" id="nXR-sb-cUU"/>
                                     <segue destination="JEX-9P-axG" kind="show" identifier="showDetail" id="1pX-5Y-nWl"/>
                                 </connections>
                             </tableViewCell>
@@ -367,11 +389,19 @@
                                     <constraint firstAttribute="width" constant="250" id="fVD-XI-RpC"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ot6-MQ-gtw" customClass="EditLocationTableViewCell" customModule="Locationer" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagCellIdentifier" textLabel="xiW-Xq-z7X" style="IBUITableViewCellStyleDefault" id="ot6-MQ-gtw">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ot6-MQ-gtw" id="2SC-kZ-lRA">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xiW-Xq-z7X">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
