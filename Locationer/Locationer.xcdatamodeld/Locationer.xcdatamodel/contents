@@ -7,14 +7,16 @@
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tags" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="location" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="tag" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Locationer.Tag" syncable="YES">
-        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="tags" inverseEntity="Location" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastTouchDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Location" positionX="1332" positionY="-1345" width="128" height="150"/>
-        <element name="Tag" positionX="1521" positionY="-1170" width="128" height="75"/>
+        <element name="Location" positionX="1332" positionY="-1345" width="128" height="148"/>
+        <element name="Tag" positionX="1512" positionY="-1111" width="128" height="103"/>
     </elements>
 </model>

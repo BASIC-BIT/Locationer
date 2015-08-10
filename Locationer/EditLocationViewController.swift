@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import GoogleMaps
-class EditLocationViewController: UIViewController {
+class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate {
     var location : Location?
     var marker : GMSMarker?
     var isEditMode = false
@@ -17,6 +17,17 @@ class EditLocationViewController: UIViewController {
     @IBOutlet weak var descField: UITextField!
     @IBOutlet weak var tagsField: UITextField!
 
+    @IBOutlet weak var tagsTableView: UITableView!
+    @IBAction func pressedAddTag(sender: AnyObject) {
+        
+        
+    }
+    @IBAction func pressedRemoveTag(sender: AnyObject) {
+        
+        
+    }
+    
+    
     @IBOutlet weak var isFavoriteSwitch: UISwitch!
     @IBAction func pressedDismissButton(sender: AnyObject) {
         var loc1 : Location
@@ -46,8 +57,10 @@ class EditLocationViewController: UIViewController {
         if(isEditMode){
             self.nameField.text = self.location?.name
             self.descField.text = self.location?.desc
-            
+            self.isFavoriteSwitch.on = self.location!.isFavorite.boolValue
         }
+        
+        tagsTableView.number
     
         // Do any additional setup after loading the view.
     }
@@ -55,6 +68,58 @@ class EditLocationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    var tagTypes: [Tag] {
+        if(_tagTypes != nil){
+            return _tagTypes!
+        }
+        
+        let tags = self.tagsFetchedResultsController.sections![0].objects as! [Tag]
+        
+        _tagTypes = tags
+        
+        return _tagTypes!
+        
+    }
+    var _tagTypes: [Tag]? = nil
+    
+    var tagsFetchedResultsController: NSFetchedResultsController {
+        if _tagsFetchedResultsController != nil {
+            return _tagsFetchedResultsController!
+        }
+        
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("Tag", inManagedObjectContext: CoreDataUtils.managedObjectContext())
+        fetchRequest.entity = entity
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "lastTouchDate", ascending: false)
+        let sortDescriptors = [sortDescriptor]
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataUtils.managedObjectContext(), sectionNameKeyPath: nil, cacheName: nil)
+        aFetchedResultsController.delegate = self
+        _tagsFetchedResultsController = aFetchedResultsController
+        
+        var error: NSError? = nil
+        if !_tagsFetchedResultsController!.performFetch(&error) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //println("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        
+        return _tagsFetchedResultsController!
+    }
+    
+    var _tagsFetchedResultsController: NSFetchedResultsController? = nil
     
 
     /*

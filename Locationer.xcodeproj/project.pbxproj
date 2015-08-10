@@ -17,11 +17,13 @@
 		0A336C211B5F66B500E21DAA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C201B5F66B500E21DAA /* Images.xcassets */; };
 		0A336C241B5F66B500E21DAA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A336C221B5F66B500E21DAA /* LaunchScreen.xib */; };
 		0A336C301B5F66B500E21DAA /* LocationerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C2F1B5F66B500E21DAA /* LocationerTests.swift */; };
-		0A35083C1B688CA400C204F3 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A35083B1B688CA400C204F3 /* Location.swift */; };
-		0A35083E1B688CA400C204F3 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A35083D1B688CA400C204F3 /* Tag.swift */; };
 		0AD3A56F1B687D91003D702C /* MapDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A56E1B687D91003D702C /* MapDisplayViewController.swift */; };
 		0AD3A5741B687E6D003D702C /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A5731B687E6D003D702C /* EditLocationViewController.swift */; };
 		0AD3A5761B687F20003D702C /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A5751B687F20003D702C /* CoreDataUtils.swift */; };
+		0AE80B0D1B7832E70080B29E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B0C1B7832E70080B29E /* Location.swift */; };
+		0AE80B0F1B7832E80080B29E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B0E1B7832E80080B29E /* Tag.swift */; };
+		0AE80B111B7833140080B29E /* EditLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B101B7833140080B29E /* EditLocationTableViewCell.swift */; };
+		0AE80B141B7842800080B29E /* TagsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B131B7842800080B29E /* TagsTableView.swift */; };
 		54098783DCE35CC12A1C6693 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F204C9A1C53798B068E898B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,11 +52,13 @@
 		0A336C291B5F66B500E21DAA /* LocationerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A336C2E1B5F66B500E21DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A336C2F1B5F66B500E21DAA /* LocationerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationerTests.swift; sourceTree = "<group>"; };
-		0A35083B1B688CA400C204F3 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		0A35083D1B688CA400C204F3 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		0AD3A56E1B687D91003D702C /* MapDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDisplayViewController.swift; sourceTree = "<group>"; };
 		0AD3A5731B687E6D003D702C /* EditLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
 		0AD3A5751B687F20003D702C /* CoreDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataUtils.swift; sourceTree = "<group>"; };
+		0AE80B0C1B7832E70080B29E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0AE80B0E1B7832E80080B29E /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		0AE80B101B7833140080B29E /* EditLocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditLocationTableViewCell.swift; sourceTree = "<group>"; };
+		0AE80B131B7842800080B29E /* TagsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableView.swift; sourceTree = "<group>"; };
 		5A68D171D24142598EFEEE18 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "locationer/Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7F204C9A1C53798B068E898B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F62CA343C83BDE7D7933642C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "locationer/Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 		0A336C111B5F66B500E21DAA /* Locationer */ = {
 			isa = PBXGroup;
 			children = (
+				0AE80B151B7842830080B29E /* Table Views */,
+				0AE80B121B7833260080B29E /* Cells */,
 				0AD3A5701B687D97003D702C /* Core Data */,
 				0AD3A56B1B687CAA003D702C /* View Controllers */,
 				0A336C141B5F66B500E21DAA /* AppDelegate.swift */,
@@ -164,10 +170,26 @@
 			isa = PBXGroup;
 			children = (
 				0AD3A5751B687F20003D702C /* CoreDataUtils.swift */,
-				0A35083D1B688CA400C204F3 /* Tag.swift */,
-				0A35083B1B688CA400C204F3 /* Location.swift */,
+				0AE80B0E1B7832E80080B29E /* Tag.swift */,
+				0AE80B0C1B7832E70080B29E /* Location.swift */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		0AE80B121B7833260080B29E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0AE80B101B7833140080B29E /* EditLocationTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		0AE80B151B7842830080B29E /* Table Views */ = {
+			isa = PBXGroup;
+			children = (
+				0AE80B131B7842800080B29E /* TagsTableView.swift */,
+			);
+			name = "Table Views";
 			sourceTree = "<group>";
 		};
 		AB50C78AE4BACC7F38F17041 /* Pods */ = {
@@ -318,12 +340,14 @@
 			files = (
 				0A336C151B5F66B500E21DAA /* AppDelegate.swift in Sources */,
 				0A336C181B5F66B500E21DAA /* Locationer.xcdatamodeld in Sources */,
-				0A35083C1B688CA400C204F3 /* Location.swift in Sources */,
+				0AE80B0D1B7832E70080B29E /* Location.swift in Sources */,
 				0A336C1A1B5F66B500E21DAA /* LocationsTableViewController.swift in Sources */,
+				0AE80B111B7833140080B29E /* EditLocationTableViewCell.swift in Sources */,
 				0AD3A5761B687F20003D702C /* CoreDataUtils.swift in Sources */,
 				0AD3A5741B687E6D003D702C /* EditLocationViewController.swift in Sources */,
-				0A35083E1B688CA400C204F3 /* Tag.swift in Sources */,
+				0AE80B0F1B7832E80080B29E /* Tag.swift in Sources */,
 				0AD3A56F1B687D91003D702C /* MapDisplayViewController.swift in Sources */,
+				0AE80B141B7842800080B29E /* TagsTableView.swift in Sources */,
 				0A336C1C1B5F66B500E21DAA /* LocationDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

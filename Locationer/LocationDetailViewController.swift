@@ -59,10 +59,10 @@ class LocationDetailViewController: UIViewController {
 //            fl.text = location?.isFavorite.boolValue.description
             let trueText = "This location is a favorite"
             let falseText = "This location is not a favorite"
-            if((location?.isFavorite.boolValue) != nil){
-                fl.text = trueText
-            } else {
+            if((location?.isFavorite.boolValue) == nil || location?.isFavorite.boolValue == false){
                 fl.text = falseText
+            } else {
+                fl.text = trueText
             }
         }
     }

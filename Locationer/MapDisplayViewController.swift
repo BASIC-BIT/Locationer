@@ -34,6 +34,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true;
         self.goToLastSavedButton.titleLabel?.numberOfLines = 0
 
         self.goToLastSavedButton.titleLabel?.text = "go to \n last saved"
