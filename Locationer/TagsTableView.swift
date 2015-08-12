@@ -9,16 +9,17 @@
 import UIKit
 
 class TagsTableView: UITableView {
-    var  editLocationViewController : EditLocationViewController?
+    var  editLocationViewController : EditLocationViewController!
     
     let kTagCellIdentifier = "TagCellIdentifier"
     
-    
-    
+    var tagTypes : [Tag] {
+        return editLocationViewController.tagTypes
+    }
     
     override func numberOfRowsInSection(section: Int) -> Int {
-//        return editLocationViewController!.tagTypes.count
-        return 1
+        return editLocationViewController.tagTypes.count
+
     }
     
     override func numberOfSections() -> Int {
@@ -26,8 +27,9 @@ class TagsTableView: UITableView {
     }
     override func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell? {
         let cell = dequeueReusableCellWithIdentifier(kTagCellIdentifier, forIndexPath: indexPath) as! LocationTableViewCell
-        cell.textLabel!.text = "Tag Example"
-        cell.textLabel!.textColor = UIColor.blueColor()
+        cell.textLabel!.text = tagTypes[indexPath.row].name
+        cell.textLabel!.textColor = Util.colorDictionary[tagTypes[indexPath.row].color]
         return cell
     }
+    
 }

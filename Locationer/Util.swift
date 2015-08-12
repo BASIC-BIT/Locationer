@@ -20,4 +20,11 @@ class Util: NSObject {
             field.inputAccessoryView = toolbar
         }
     }
+    class func makeViewTapableToEndEditing(vc : UIViewController){
+        var tap = UITapGestureRecognizer(target: vc, action: "endEditing")
+        vc.view.addGestureRecognizer(tap)
+    }
+    class var colorDictionary : [String : UIColor]{
+        return ["black" : UIColor.blackColor(), "dark grey" : UIColor.darkGrayColor(), "green" : UIColor.greenColor(),"red" : UIColor.redColor(), "blue" : UIColor.blueColor(), "cyan" : UIColor.cyanColor(), "yellow" : UIColor.yellowColor(), "magenta" : UIColor.magentaColor(), "purple" : UIColor.purpleColor()]
+    }
 }

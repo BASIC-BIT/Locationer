@@ -53,15 +53,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        if let locationToStart = detailLocationToAppearAt{
-//            let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
-//            self.mapView.camera = camera
-//            self.detailLocationToAppearAt = nil
-//        }
         _markers = nil
         self.mapView.clear()
         for marker in markers{
-//            println("marker title \(marker.title)")
             if marker.map == nil{
                 marker.map = self.mapView
             }
@@ -237,7 +231,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             (segue.destinationViewController as! EditLocationViewController).marker = (self.lastPressedMarker != nil) ? self.lastPressedMarker : self.quickSaveMarker
         }
         if segue.identifier == tableSegueIdentifier{
-//            (segue.destinationViewController as! LocationsTableViewController)._fetchedResultsController = self.fetchedResultsController
+//            (segue.destinationViewController as! LocationsTableViewController).navigationItem = self.navigationItem
         }
     }
 

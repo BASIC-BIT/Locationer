@@ -23,10 +23,10 @@
 		0AD3A5741B687E6D003D702C /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A5731B687E6D003D702C /* EditLocationViewController.swift */; };
 		0AD3A5761B687F20003D702C /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3A5751B687F20003D702C /* CoreDataUtils.swift */; };
 		0AE80B0D1B7832E70080B29E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B0C1B7832E70080B29E /* Location.swift */; };
-		0AE80B0F1B7832E80080B29E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B0E1B7832E80080B29E /* Tag.swift */; };
 		0AE80B141B7842800080B29E /* TagsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B131B7842800080B29E /* TagsTableView.swift */; };
 		0AE80B171B7852EE0080B29E /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE80B161B7852EE0080B29E /* LocationTableViewCell.swift */; };
 		0AF3319A1B7B1B4E00BEEE89 /* extensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF331991B7B1B4E00BEEE89 /* extensionViewController.swift */; };
+		0AF3319F1B7B22BD00BEEE89 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3319E1B7B22BD00BEEE89 /* Tag.swift */; };
 		54098783DCE35CC12A1C6693 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F204C9A1C53798B068E898B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -61,10 +61,10 @@
 		0AD3A5731B687E6D003D702C /* EditLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
 		0AD3A5751B687F20003D702C /* CoreDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataUtils.swift; sourceTree = "<group>"; };
 		0AE80B0C1B7832E70080B29E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		0AE80B0E1B7832E80080B29E /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		0AE80B131B7842800080B29E /* TagsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableView.swift; sourceTree = "<group>"; };
 		0AE80B161B7852EE0080B29E /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		0AF331991B7B1B4E00BEEE89 /* extensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensionViewController.swift; sourceTree = "<group>"; };
+		0AF3319E1B7B22BD00BEEE89 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		5A68D171D24142598EFEEE18 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "locationer/Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7F204C9A1C53798B068E898B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F62CA343C83BDE7D7933642C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "locationer/Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,8 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				0AD3A5751B687F20003D702C /* CoreDataUtils.swift */,
-				0AE80B0E1B7832E80080B29E /* Tag.swift */,
 				0AE80B0C1B7832E70080B29E /* Location.swift */,
+				0AF3319E1B7B22BD00BEEE89 /* Tag.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -373,7 +373,7 @@
 				0AE80B171B7852EE0080B29E /* LocationTableViewCell.swift in Sources */,
 				0A7CB1201B7B114B007CEE7D /* Util.swift in Sources */,
 				0AD3A5741B687E6D003D702C /* EditLocationViewController.swift in Sources */,
-				0AE80B0F1B7832E80080B29E /* Tag.swift in Sources */,
+				0AF3319F1B7B22BD00BEEE89 /* Tag.swift in Sources */,
 				0AD3A56F1B687D91003D702C /* MapDisplayViewController.swift in Sources */,
 				0AE80B141B7842800080B29E /* TagsTableView.swift in Sources */,
 				0A336C1C1B5F66B500E21DAA /* LocationDetailViewController.swift in Sources */,

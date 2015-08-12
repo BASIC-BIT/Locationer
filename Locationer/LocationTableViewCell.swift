@@ -16,6 +16,7 @@ class LocationTableViewCell: UITableViewCell {
 
     
     var location : Location!
+    var isFavorite : Bool?
     
     func configureCellForLocation( location : Location){
         self.location = location
@@ -25,11 +26,15 @@ class LocationTableViewCell: UITableViewCell {
         }else{
             self.tagLabel.text = ""
         }
-        
+
         self.starredButton.setTitle(self.location.isFavorite.boolValue ? "Favorite" : "Not Favorite", forState: UIControlState.Normal)
+
 //        self.starredButton.setImage(, forState: UIControlState.)
     }
     @IBAction func pressedStarButton(sender: AnyObject) {
+        self.location.isFavorite = NSNumber(bool: !self.location.isFavorite.boolValue)
+        self.starredButton.setTitle(self.location.isFavorite.boolValue ? "Favorite" : "Not Favorite", forState: UIControlState.Normal)
+        CoreDataUtils.saveContext()
     }
     override func awakeFromNib() {
         super.awakeFromNib()

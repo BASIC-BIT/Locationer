@@ -17,6 +17,18 @@ class LocationDetailViewController: UIViewController {
     let kShowOnMapFromDetailSegueIdentifier = "showOnMapFromDetailSegueIdentifier"
     let kToEditLocationSegueIdentifier = "toEditLocationSegueIdentifier"
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        self.configureView()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "pressedEdit:")
+        
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.configureView()
+    }
+    
     @IBAction func pressedGoToOnMap(sender: AnyObject) {
         self.performSegueWithIdentifier(kShowOnMapFromDetailSegueIdentifier, sender: self)
     }
@@ -43,8 +55,10 @@ class LocationDetailViewController: UIViewController {
         
 
     }
-    @IBAction func pressedEditButton(sender: AnyObject) {
-        self.performSegueWithIdentifier(kToEditLocationSegueIdentifier, sender: self)
+
+    @IBAction func pressedEdit(sender: AnyObject) {
+       self.performSegueWithIdentifier(kToEditLocationSegueIdentifier, sender: self)
+        
     }
 
     func configureView() {
@@ -67,16 +81,6 @@ class LocationDetailViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
-
-    }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.configureView()
-    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == kShowOnMapFromDetailSegueIdentifier){

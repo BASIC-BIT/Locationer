@@ -14,6 +14,7 @@ import GoogleMaps
 class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate , UITextFieldDelegate {
     var location : Location?
     var marker : GMSMarker?
+    var tagFromAddTag : Tag?
     var isEditMode = false
     let kShowAddTagIdentifier = "ShowAddTagIdentifier"
     
@@ -76,8 +77,12 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         self.tagsTableView.editLocationViewController = self
         let fields = [self.nameField, self.descField]
         Util.addBarToTextField(fields, view: self.view)
-
-
+    }
+    override func viewDidAppear(animated: Bool) {
+        self._tagTypes = nil;
+        self.tagsTableView.reloadData()
+        println("objects: \(self.tagsFetchedResultsController.sections![0].objects)")
+        println("num \(self.tagTypes.count)")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController{
     func endEditing(){
+        //enables a simple selector for targetted UIViewControllers
         self.view.endEditing(true)
     }
 }

@@ -7,15 +7,31 @@
 //
 
 import UIKit
+import CoreData
+
 class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource{
     var tagTypes : [Tag]? = nil
     var colorNames : [String] = []
     var colorDictionary : [String : UIColor] = [:]
     var colors : [UIColor] = [UIColor.blackColor(),UIColor.darkGrayColor(),UIColor.lightGrayColor(),UIColor.whiteColor(),UIColor.grayColor(),UIColor.redColor()]
-    
+    var selectedColor : String?
 
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var tagNameTextField: UITextField!
+    @IBAction func pressedSaveTag(sender: UIButton) {
+        //TODO: save tag to coredata
+        let tagName = self.tagNameTextField.text
+        let newTag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Tag
+        newTag.name = tagName
+        newTag.color = colorNames[self.colorPicker.selectedRowInComponent(0)]
+        newTag.lastTouchDate = NSDate()
+        CoreDataUtils.saveContext()
+    }
+    
+    @IBAction func pressedClose(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +39,17 @@ class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerVie
         self.colorPicker.delegate = self
         self.colorPicker.dataSource = self
         // populate this dictionary with all the colors that you want to populate the picker
-        self.colorDictionary = ["black" : UIColor.blackColor(), "dark grey" : UIColor.darkGrayColor(), "green" : UIColor.greenColor(),"red" : UIColor.redColor(), "blue" : UIColor.blueColor(), "cyan" : UIColor.cyanColor(), "yellow" : UIColor.yellowColor(), "magenta" : UIColor.magentaColor(), "purple" : UIColor.purpleColor()]
+        self.colorDictionary = Util.colorDictionary
         
         for (name, color) in colorDictionary{
             println(name)
             colorNames.append(name)
         }
+        
         let fields = [self.tagNameTextField]
         Util.addBarToTextField(fields, view: self.view)
-    
+        Util.makeViewTapableToEndEditing(self)
+
 
 
         // Do any additional setup after loading the view.
