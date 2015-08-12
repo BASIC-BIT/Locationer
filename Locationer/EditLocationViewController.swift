@@ -10,8 +10,11 @@ import UIKit
 import CoreData
 import GoogleMaps
 
-
-class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate , UITextFieldDelegate {
+//TODO: fix delete for table
+//TODO: save tag to core data
+//!!!: How are we going to deal with people deleting tags that exist on other locations?
+class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate , UITextFieldDelegate , UITableViewDataSource, UITableViewDelegate {
+    let kTagCellIdentifier = "TagCellIdentifier"
     var location : Location?
     var marker : GMSMarker?
     var tagFromAddTag : Tag?
@@ -27,8 +30,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         self.performSegueWithIdentifier(kShowAddTagIdentifier, sender: self)
     }
     @IBAction func pressedRemoveTag(sender: AnyObject) {
-        
-        
+        self.tagsTableView.setEditing(!self.tagsTableView.editing, animated: true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -68,7 +70,6 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
             self.isFavoriteSwitch.on = self.location!.isFavorite.boolValue
         }
         
-        
         var tap = UITapGestureRecognizer(target: self, action: "endEditing")
         self.view.addGestureRecognizer(tap)
         self.nameField.becomeFirstResponder()
@@ -79,16 +80,21 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         Util.addBarToTextField(fields, view: self.view)
     }
     override func viewDidAppear(animated: Bool) {
+        self._tagsFetchedResultsController = nil;
         self._tagTypes = nil;
         self.tagsTableView.reloadData()
         println("objects: \(self.tagsFetchedResultsController.sections![0].objects)")
         println("num \(self.tagTypes.count)")
+        self.tagsTableView.printTagCount()
+
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+
     var tagTypes: [Tag] {
         if(_tagTypes != nil){
             return _tagTypes!
@@ -141,7 +147,42 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     
     var _tagsFetchedResultsController: NSFetchedResultsController? = nil
     
-
+    // MARK: - TableView Delegate and Data Source Functions
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tagTypes.count
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tagsTableView.dequeueReusableCellWithIdentifier(kTagCellIdentifier, forIndexPath: indexPath) as! TagTypesTableViewCell
+        cell.tagNameLabel.text = tagTypes[indexPath.row].name
+        cell.tagNameLabel.textColor = Util.colorDictionary[tagTypes[indexPath.row].color]
+        return cell
+    }
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        println("commit")
+        if editingStyle == .Delete {
+            let TagToDelete = tagTypes[indexPath.row]
+            CoreDataUtils.managedObjectContext().deleteObject(TagToDelete)
+            CoreDataUtils.saveContext()
+            _tagTypes = nil;
+            if tagTypes.count == 0{
+                tableView.reloadData()
+                setEditing(false, animated: true)
+            } else {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }
+        }
+    }
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return tagTypes.count > 0
+    }
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if(self.tagsTableView.editing){
+            return UITableViewCellEditingStyle.Delete
+        } else {
+            println("returned none")
+            return UITableViewCellEditingStyle.None
+        }
+    }
 
     // MARK: - Navigation
 

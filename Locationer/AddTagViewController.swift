@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+//TODO: Make this vc prettier. It's bare bones.
 class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource{
     var tagTypes : [Tag]? = nil
     var colorNames : [String] = []
@@ -16,16 +16,17 @@ class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerVie
     var colors : [UIColor] = [UIColor.blackColor(),UIColor.darkGrayColor(),UIColor.lightGrayColor(),UIColor.whiteColor(),UIColor.grayColor(),UIColor.redColor()]
     var selectedColor : String?
 
+
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var tagNameTextField: UITextField!
     @IBAction func pressedSaveTag(sender: UIButton) {
-        //TODO: save tag to coredata
         let tagName = self.tagNameTextField.text
         let newTag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Tag
         newTag.name = tagName
         newTag.color = colorNames[self.colorPicker.selectedRowInComponent(0)]
         newTag.lastTouchDate = NSDate()
         CoreDataUtils.saveContext()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func pressedClose(sender: AnyObject) {

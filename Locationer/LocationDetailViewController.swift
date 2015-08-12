@@ -42,7 +42,9 @@ class LocationDetailViewController: UIViewController {
 //        }
 //         opens to location but without marker... not ideal
 //        var urlToSend = "https://www.google.com/maps/@"
+        
         //TODO: Add reverse geocoding so that you can with directions to the location
+        // this is last
         var urlToSend = "http://maps.apple.com/?ll="
         urlToSend += self.location!.lat.stringValue
         urlToSend += ","
