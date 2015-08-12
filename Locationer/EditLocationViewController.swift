@@ -9,18 +9,21 @@
 import UIKit
 import CoreData
 import GoogleMaps
+
+
 class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate , UITextFieldDelegate {
     var location : Location?
     var marker : GMSMarker?
     var isEditMode = false
+    let kShowAddTagIdentifier = "ShowAddTagIdentifier"
+    
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var descField: UITextField!
     @IBOutlet weak var tagsField: UITextField!
 
     @IBOutlet weak var tagsTableView: TagsTableView!
     @IBAction func pressedAddTag(sender: AnyObject) {
-        
-        
+        self.performSegueWithIdentifier(kShowAddTagIdentifier, sender: self)
     }
     @IBAction func pressedRemoveTag(sender: AnyObject) {
         
@@ -71,9 +74,10 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         self.nameField.delegate = self
         self.descField.delegate = self
         self.tagsTableView.editLocationViewController = self
-    }
-    func endEditing() {
-        self.view.endEditing(true)
+        let fields = [self.nameField, self.descField]
+        Util.addBarToTextField(fields, view: self.view)
+
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -133,14 +137,18 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     var _tagsFetchedResultsController: NSFetchedResultsController? = nil
     
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == kShowAddTagIdentifier){
+            let addTagVC = segue.destinationViewController as! AddTagViewController
+            addTagVC.tagTypes = self.tagTypes
+        }
     }
-    */
+
 
 }

@@ -36,7 +36,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true;
         self.goToLastSavedButton.titleLabel?.numberOfLines = 0
-
         self.goToLastSavedButton.titleLabel?.text = "go to \n last saved"
         if let locationToStart = detailLocationToAppearAt{
             let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
@@ -67,8 +66,13 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
                 marker.map = self.mapView
             }
         }
+        if(!self.quickSaveMarkerIsFixed){
+            _setQuickSaveMarker(self.mapView.camera)            
+        }
+
         println("did appear")
     }
+    
     // MARK: - mapView functions
     func mapView(mapView: GMSMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
         println("did hold")
@@ -86,6 +90,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         return true
     }
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
+        _setQuickSaveMarker(position)
+    }
+    func _setQuickSaveMarker(position : GMSCameraPosition){
         if(self.quickSaveMarkerIsFixed){
             return
         }
@@ -135,7 +142,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         self.performSegueWithIdentifier(tableSegueIdentifier, sender: self)
     }
     @IBAction func pressedSaveButton(sender: AnyObject) {
-        if let validMarker = self.lastPressedMarker{
+        if let validMarker =  self.lastPressedMarker{
+            self.performSegueWithIdentifier(saveSegueIdentifier, sender: self)
+        } else if let validMarker = self.quickSaveMarker{
             self.performSegueWithIdentifier(saveSegueIdentifier, sender: self)
         }
     }
@@ -225,7 +234,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == saveSegueIdentifier{
-            (segue.destinationViewController as! EditLocationViewController).marker = self.lastPressedMarker
+            (segue.destinationViewController as! EditLocationViewController).marker = (self.lastPressedMarker != nil) ? self.lastPressedMarker : self.quickSaveMarker
         }
         if segue.identifier == tableSegueIdentifier{
 //            (segue.destinationViewController as! LocationsTableViewController)._fetchedResultsController = self.fetchedResultsController
