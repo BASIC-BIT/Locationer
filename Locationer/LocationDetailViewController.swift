@@ -12,6 +12,7 @@ class LocationDetailViewController: UIViewController {
 
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var descLabel : UILabel!
+    @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var isFavLabel: UILabel!
     var location : Location?
     let kShowOnMapFromDetailSegueIdentifier = "showOnMapFromDetailSegueIdentifier"
@@ -71,6 +72,12 @@ class LocationDetailViewController: UIViewController {
             if let dl = self.descLabel {
                 dl.text = location!.desc
             }
+        if let tag = self.location?.tag{
+            self.tagLabel.text = tag.name
+            self.tagLabel.textColor = Util.colorDictionary[tag.color]
+        } else {
+            self.tagLabel.text = ""
+        }
         if let fl = self.isFavLabel {
 //            fl.text = location?.isFavorite.boolValue.description
             let trueText = "This location is a favorite"

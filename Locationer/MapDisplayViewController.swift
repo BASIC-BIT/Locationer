@@ -116,6 +116,11 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             let marker = GMSMarker(position: markerLocation)
             marker.title = savedLocation.name
             marker.snippet = savedLocation.desc
+            if let tag = savedLocation.tag{
+                marker.icon = GMSMarker.markerImageWithColor(Util.colorDictionary[tag.color])
+
+            }
+        
             marker.appearAnimation = kGMSMarkerAnimationPop
             markerArray.append(marker)
             println("refreshed location with name \(savedLocation.name)")

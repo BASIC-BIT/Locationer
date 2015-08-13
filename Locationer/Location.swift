@@ -17,6 +17,6 @@ class Location: NSManagedObject {
     @NSManaged var lat: NSNumber
     @NSManaged var lon: NSNumber
     @NSManaged var name: String
-    @NSManaged var tag: Tag
+    @NSManaged var tag: Tag?
 
 }

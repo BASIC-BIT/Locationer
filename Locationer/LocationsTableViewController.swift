@@ -154,8 +154,9 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "isFavorite", ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: "name", ascending: true)
-        let sortDescriptors = [sortDescriptor, sortDescriptor2]
+        let sortDescriptor2 = NSSortDescriptor(key: "tag.name", ascending: true)
+        let sortDescriptor3 = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptors = [sortDescriptor, sortDescriptor2, sortDescriptor3]
         
         fetchRequest.sortDescriptors = sortDescriptors
         

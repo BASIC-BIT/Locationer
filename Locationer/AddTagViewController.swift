@@ -55,18 +55,39 @@ class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerVie
 
         // Do any additional setup after loading the view.
     }
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let colorLookup = colorDictionary[colorNames[row]]
-        let name = colorNames[row]
-        var string : NSAttributedString
-        if let color = colorLookup {
-            string = NSAttributedString(string: name, attributes: [NSForegroundColorAttributeName:color])
-        } else {
+//    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+//        let colorLookup = colorDictionary[colorNames[row]]
+//        let name = colorNames[row]
+//        var string : NSAttributedString
+//        if let color = colorLookup {
+//            string = NSAttributedString(string: name, attributes: [NSForegroundColorAttributeName:color])
+//        } else {
+//            string = NSAttributedString(string: name)
+//        }
+//        string = NSAttributedString(string: name)
+//
+//        return string
+//        
+//    }
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        var pickerLabel = view as! UILabel!
+        if view == nil{
+            pickerLabel = UILabel()
+            pickerLabel.backgroundColor = colorDictionary[colorNames[row]]
+            let colorLookup = colorDictionary[colorNames[row]]
+            let name = colorNames[row]
+            var string : NSAttributedString
+            if name == "black" {
+                string = NSAttributedString(string: name, attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+            } else {
+                string = NSAttributedString(string: name)
+            }
             string = NSAttributedString(string: name)
+            println("string = \(string.string)")
+            pickerLabel.attributedText = string
+            pickerLabel.textAlignment = NSTextAlignment.Center
         }
-
-        return string
-        
+        return pickerLabel as UIView
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         println("selected row")

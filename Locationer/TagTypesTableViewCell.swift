@@ -12,6 +12,8 @@ class TagTypesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tagNameLabel: UILabel!
 
+    @IBOutlet weak var checkButton: UIButton!
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

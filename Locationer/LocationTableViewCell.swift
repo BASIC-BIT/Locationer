@@ -23,6 +23,7 @@ class LocationTableViewCell: UITableViewCell {
         self.nameLabel.text = self.location.name
         if let tag = self.location?.tag {
             self.tagLabel.text = tag.name
+            self.tagLabel.textColor = Util.colorDictionary[tag.color]
         }else{
             self.tagLabel.text = ""
         }

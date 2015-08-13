@@ -24,18 +24,18 @@ class TagsTableView: UITableView {
         }
         self.reloadData()
     }
-    override func numberOfRowsInSection(section: Int) -> Int {
-        return tagTypes.count
-        
-    }
-    override func numberOfSections() -> Int {
-        return 1
-    }
-    override func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell? {
-        let cell = dequeueReusableCellWithIdentifier(kTagCellIdentifier, forIndexPath: indexPath) as! TagTypesTableViewCell
-        cell.tagNameLabel.text = tagTypes[indexPath.row].name
-        cell.tagNameLabel.textColor = Util.colorDictionary[tagTypes[indexPath.row].color]
-        return cell
-    }
+//    override func numberOfRowsInSection(section: Int) -> Int {
+//        return tagTypes.count
+//        
+//    }
+//    override func numberOfSections() -> Int {
+//        return 1
+//    }
+//    override func cellForRowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell? {
+//        let cell = dequeueReusableCellWithIdentifier(kTagCellIdentifier, forIndexPath: indexPath) as! TagTypesTableViewCell
+//        cell.tagNameLabel.text = tagTypes[indexPath.row].name
+//        cell.tagNameLabel.textColor = Util.colorDictionary[tagTypes[indexPath.row].color]
+//        return cell
+//    }
     
 }
