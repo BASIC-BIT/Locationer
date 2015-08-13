@@ -20,6 +20,13 @@ class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var tagNameTextField: UITextField!
     @IBAction func pressedSaveTag(sender: UIButton) {
+        saveTag()
+    }
+    
+    func pressedSaveKeyboardButton(){
+        saveTag()
+    }
+    func saveTag(){
         let tagName = self.tagNameTextField.text
         let newTag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Tag
         newTag.name = tagName
@@ -48,7 +55,7 @@ class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerVie
         }
         
         let fields = [self.tagNameTextField]
-        Util.addBarToTextField(fields, view: self.view)
+        Util.addBarToTextField(fields, view: self.view, controller: self)
         Util.makeViewTapableToEndEditing(self)
 
 

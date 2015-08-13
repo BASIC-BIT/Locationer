@@ -38,6 +38,10 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    func pressedSaveKeyboardButton(){
+        pressedSaveButton(self)
+    }
     @IBAction func pressedSaveButton(sender: AnyObject) {
         if let tag = selectedTag {
             var loc1 : Location
@@ -105,7 +109,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         self.tagsTableView.tag = 5
 
         let fields = [self.nameField, self.descField]
-        Util.addBarToTextField(fields, view: self.view)
+        Util.addBarToTextField(fields, view: self.view, controller: self)
     }
     override func viewDidAppear(animated: Bool) {
         self._tagsFetchedResultsController = nil;

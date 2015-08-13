@@ -90,7 +90,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbb-3C-f1q">
                                 <rect key="frame" x="266" y="327" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -228,41 +228,73 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AY-XG-z6b" userLabel="Button bar">
                                 <rect key="frame" x="0.0" y="530" width="600" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLW-MX-wVf">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
-                                        <state key="normal" title="List">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gLW-MX-wVf">
+                                        <rect key="frame" x="10" y="0.0" width="145" height="70"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="List">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                         </state>
                                         <connections>
                                             <action selector="pressedListButton:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="ilq-P4-eKs"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7J-Lp-YFg">
-                                        <rect key="frame" x="150" y="0.0" width="150" height="70"/>
-                                        <state key="normal" title="Save">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i7J-Lp-YFg">
+                                        <rect key="frame" x="155" y="0.0" width="145" height="70"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Save">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                         </state>
                                         <connections>
                                             <action selector="pressedSaveButton:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="72Y-Ax-odz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQQ-aS-HNg">
-                                        <rect key="frame" x="300" y="0.0" width="150" height="70"/>
-                                        <state key="normal" title="Quick Save">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQQ-aS-HNg">
+                                        <rect key="frame" x="300" y="0.0" width="145" height="70"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment>
+                                                    <string key="content">Quick
+Save</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                         </state>
                                         <connections>
                                             <action selector="pressedQuickSave:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="BpL-Lc-it6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzT-Jc-Gh1">
-                                        <rect key="frame" x="450" y="0.0" width="150" height="70"/>
-                                        <state key="normal" title="Go To Last Saved">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HzT-Jc-Gh1">
+                                        <rect key="frame" x="445" y="0.0" width="145" height="70"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment>
+                                                    <string key="content">Go To
+Last Saved</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                         </state>
                                         <connections>
                                             <action selector="pressedGoToLastSaved:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="rMm-7p-0ax"/>
@@ -281,7 +313,7 @@
                                     <constraint firstItem="i7J-Lp-YFg" firstAttribute="leading" secondItem="gLW-MX-wVf" secondAttribute="trailing" id="JMM-54-rwZ"/>
                                     <constraint firstItem="HzT-Jc-Gh1" firstAttribute="leading" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="LHt-Fm-8lo"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="height" secondItem="i7J-Lp-YFg" secondAttribute="height" id="Pft-pU-NT0"/>
-                                    <constraint firstAttribute="trailing" secondItem="HzT-Jc-Gh1" secondAttribute="trailing" id="QhP-uj-sR9"/>
+                                    <constraint firstAttribute="trailing" secondItem="HzT-Jc-Gh1" secondAttribute="trailing" constant="10" id="QhP-uj-sR9"/>
                                     <constraint firstAttribute="trailing" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="RDf-sw-L52"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="height" secondItem="gLW-MX-wVf" secondAttribute="height" id="Txr-CU-JKf"/>
                                     <constraint firstItem="HzT-Jc-Gh1" firstAttribute="leading" secondItem="QQQ-aS-HNg" secondAttribute="trailing" id="WUZ-f6-xOe"/>
@@ -289,7 +321,7 @@
                                     <constraint firstAttribute="centerY" secondItem="gLW-MX-wVf" secondAttribute="centerY" id="a9Y-lI-lkN"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="width" secondItem="i7J-Lp-YFg" secondAttribute="width" id="bJ3-JB-Oio"/>
                                     <constraint firstItem="QQQ-aS-HNg" firstAttribute="height" secondItem="HzT-Jc-Gh1" secondAttribute="height" id="dNc-TN-7aT"/>
-                                    <constraint firstItem="gLW-MX-wVf" firstAttribute="leading" secondItem="9AY-XG-z6b" secondAttribute="leading" id="fwe-Kr-nBR"/>
+                                    <constraint firstItem="gLW-MX-wVf" firstAttribute="leading" secondItem="9AY-XG-z6b" secondAttribute="leading" constant="10" id="fwe-Kr-nBR"/>
                                     <constraint firstAttribute="centerY" secondItem="QQQ-aS-HNg" secondAttribute="centerY" id="gBh-ae-9ay"/>
                                     <constraint firstItem="gLW-MX-wVf" firstAttribute="top" secondItem="9AY-XG-z6b" secondAttribute="top" id="kui-SG-wGf"/>
                                     <constraint firstAttribute="centerY" secondItem="i7J-Lp-YFg" secondAttribute="centerY" id="ni8-6d-jse"/>
@@ -305,8 +337,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2EO-hr-rAX" userLabel="Map View" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="600" height="466"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EO-hr-rAX" userLabel="Map View" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -337,6 +369,7 @@
                     <connections>
                         <outlet property="goToLastSavedButton" destination="HzT-Jc-Gh1" id="UPe-n2-pKt"/>
                         <outlet property="mapView" destination="2EO-hr-rAX" id="R7i-fg-Njm"/>
+                        <outlet property="quickSaveButton" destination="QQQ-aS-HNg" id="YpC-lF-4jG"/>
                         <segue destination="EyR-KB-meV" kind="presentation" identifier="saveSegueIdentifier" id="H9u-Zy-Fl2"/>
                         <segue destination="7bK-jq-Zjz" kind="show" identifier="tableSegueIdentifier" id="PC8-9y-KUn"/>
                     </connections>
@@ -624,7 +657,7 @@
         <image name="ic_menu_bars.png" width="20" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="H9u-Zy-Fl2"/>
         <segue reference="blQ-vy-yQP"/>
-        <segue reference="nzb-pA-mxi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -36,7 +36,8 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true;
         self.goToLastSavedButton.titleLabel?.numberOfLines = 0
-        self.goToLastSavedButton.titleLabel?.text = "go to \n last saved"
+        self.quickSaveButton.titleLabel?.numberOfLines = 0
+//        self.goToLastSavedButton.titleLabel?.text = "go to \n last saved"
         if let locationToStart = detailLocationToAppearAt{
             let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
             self.mapView.camera = camera
@@ -136,6 +137,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     }
     // MARK: - Button Press Actions
     @IBOutlet weak var goToLastSavedButton: UIButton!
+    
+    @IBOutlet weak var quickSaveButton: UIButton!
+    
     
     @IBAction func pressedListButton(sender: AnyObject) {
         self.performSegueWithIdentifier(tableSegueIdentifier, sender: self)
