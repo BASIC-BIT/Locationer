@@ -25,6 +25,6 @@ class Util: NSObject {
         vc.view.addGestureRecognizer(tap)
     }
     class var colorDictionary : [String : UIColor]{
-        return [ "dark grey" : UIColor.darkGrayColor(), "green" : UIColor.greenColor(),"red" : UIColor.redColor(), "blue" : UIColor.blueColor(), "cyan" : UIColor.cyanColor(), "yellow" : UIColor.yellowColor(), "magenta" : UIColor.magentaColor(), "purple" : UIColor.purpleColor()]
+        return [ "dark grey" : UIColor.darkGrayColor(), "green" : UIColor.greenColor(),"red" : UIColor.redColor(), "blue" : UIColor.blueColor(), "cyan" : UIColor.cyanColor(), "yellow" : UIColor.yellowColor(), "magenta" : UIColor.magentaColor(), "purple" : UIColor.purpleColor(), "orange" : UIColor.orangeColor()]
     }
 }
