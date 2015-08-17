@@ -754,15 +754,6 @@ Last Saved</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBa-qf-Pwc">
-                                <rect key="frame" x="345" y="495" width="91" height="30"/>
-                                <state key="normal" title="save new tag">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedSaveTag:" destination="sDs-Qf-OML" eventType="touchUpInside" id="RFu-4N-Ogb"/>
-                                </connections>
-                            </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stL-rm-ol2">
                                 <rect key="frame" x="175" y="309" width="250" height="162"/>
                                 <constraints>
@@ -770,24 +761,43 @@ Last Saved</string>
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSU-30-pe0">
-                                <rect key="frame" x="190" y="495" width="40" height="30"/>
+                                <rect key="frame" x="190" y="525" width="40" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="190" y="325" width="40" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="pressedClose:" destination="sDs-Qf-OML" eventType="touchUpInside" id="Vt3-Ja-Vfp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBa-qf-Pwc">
+                                <rect key="frame" x="345" y="525" width="91" height="30"/>
+                                <state key="normal" title="save new tag">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="345" y="325" width="91" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="pressedSaveTag:" destination="sDs-Qf-OML" eventType="touchUpInside" id="RFu-4N-Ogb"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="BI7-xz-Fvr" secondAttribute="centerX" id="1GR-1M-Jvh"/>
-                            <constraint firstAttribute="centerY" secondItem="stL-rm-ol2" secondAttribute="centerY" constant="-90" id="8zG-4W-xid"/>
-                            <constraint firstAttribute="centerY" secondItem="eSU-30-pe0" secondAttribute="centerY" constant="-210" id="QeP-uX-4MX"/>
-                            <constraint firstAttribute="centerY" secondItem="BI7-xz-Fvr" secondAttribute="centerY" constant="55" id="Urb-qv-VqV"/>
+                            <constraint firstAttribute="centerY" secondItem="stL-rm-ol2" secondAttribute="centerY" constant="-90" id="8zG-4W-xid">
+                                <variation key="heightClass=compact" constant="-15"/>
+                            </constraint>
+                            <constraint firstItem="7Nb-TC-hlE" firstAttribute="top" secondItem="YBa-qf-Pwc" secondAttribute="bottom" constant="45" id="SUj-dk-XMx"/>
+                            <constraint firstAttribute="centerY" secondItem="BI7-xz-Fvr" secondAttribute="centerY" constant="55" id="Urb-qv-VqV">
+                                <variation key="heightClass=compact" constant="99"/>
+                            </constraint>
+                            <constraint firstItem="7Nb-TC-hlE" firstAttribute="top" secondItem="eSU-30-pe0" secondAttribute="bottom" constant="45" id="WRJ-iz-dJN"/>
                             <constraint firstAttribute="centerX" secondItem="AZi-w9-rPz" secondAttribute="centerX" id="byz-ya-1P6"/>
                             <constraint firstAttribute="centerX" secondItem="stL-rm-ol2" secondAttribute="centerX" id="fRq-OW-vV7"/>
-                            <constraint firstAttribute="centerY" secondItem="YBa-qf-Pwc" secondAttribute="centerY" constant="-210" id="jLa-tb-NJ3"/>
                             <constraint firstAttribute="centerX" secondItem="eSU-30-pe0" secondAttribute="centerX" constant="90" id="mmV-Ge-JSv"/>
                             <constraint firstAttribute="centerY" secondItem="AZi-w9-rPz" secondAttribute="centerY" constant="150" id="rdD-RL-8xf"/>
                             <constraint firstAttribute="centerX" secondItem="YBa-qf-Pwc" secondAttribute="centerX" constant="-90" id="uDC-1V-lJC"/>
