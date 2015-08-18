@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A282C0F1B7458CE00202652 /* ic_menu_bars.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A282C0E1B7458CE00202652 /* ic_menu_bars.png */; };
+		0A285BD21B83AE23000D4828 /* NSDate Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A285BD11B83AE23000D4828 /* NSDate Extension.swift */; };
 		0A2C49351B743124001C1CE3 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A2C49341B743124001C1CE3 /* Podfile */; };
 		0A336C151B5F66B500E21DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C141B5F66B500E21DAA /* AppDelegate.swift */; };
 		0A336C181B5F66B500E21DAA /* Locationer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A336C161B5F66B500E21DAA /* Locationer.xcdatamodeld */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		0A282C0E1B7458CE00202652 /* ic_menu_bars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu_bars.png; sourceTree = "<group>"; };
+		0A285BD11B83AE23000D4828 /* NSDate Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate Extension.swift"; sourceTree = "<group>"; };
 		0A2C49341B743124001C1CE3 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		0A336C0F1B5F66B500E21DAA /* Locationer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locationer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A336C131B5F66B500E21DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				0AF331991B7B1B4E00BEEE89 /* extensionViewController.swift */,
+				0A285BD11B83AE23000D4828 /* NSDate Extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				TargetAttributes = {
 					0A336C0E1B5F66B500E21DAA = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = NNHWAHYP26;
 					};
 					0A336C281B5F66B500E21DAA = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -387,6 +391,7 @@
 				0AD3A5741B687E6D003D702C /* EditLocationViewController.swift in Sources */,
 				0AF3319F1B7B22BD00BEEE89 /* Tag.swift in Sources */,
 				0AD3A56F1B687D91003D702C /* MapDisplayViewController.swift in Sources */,
+				0A285BD21B83AE23000D4828 /* NSDate Extension.swift in Sources */,
 				0AE80B141B7842800080B29E /* TagsTableView.swift in Sources */,
 				0A336C1C1B5F66B500E21DAA /* LocationDetailViewController.swift in Sources */,
 			);
@@ -519,10 +524,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Locationer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -534,10 +542,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Locationer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

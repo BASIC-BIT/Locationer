@@ -19,6 +19,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     var tagFromAddTag : Tag?
     var isEditMode = false
     var selectedTag : Tag?
+    var selectedCell : TagTypesTableViewCell?
     let kShowAddTagIdentifier = "ShowAddTagIdentifier"
     
     @IBOutlet weak var nameField: UITextField!
@@ -58,9 +59,9 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
             loc1.desc = descField.text
             loc1.isFavorite = NSNumber(bool: isFavoriteSwitch.on)
             loc1.dateAdded = NSDate()
-            if let tag = selectedTag {
-                loc1.tag = tag
-            }
+        }
+        if let tag = selectedTag {
+            loc1.tag = tag
         }
         
         CoreDataUtils.saveContext()
@@ -286,11 +287,16 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = self.tagsTableView.cellForRowAtIndexPath(indexPath) as! TagTypesTableViewCell
         cell.checkButton.setImage(UIImage(named: "no_check.png"), forState: UIControlState.Normal)
+
     }
     func _selectRowAtIndexPath(indexPath : NSIndexPath){
         let cell = self.tagsTableView.cellForRowAtIndexPath(indexPath) as! TagTypesTableViewCell
         cell.checkButton.setImage(UIImage(named: "check.png"), forState: UIControlState.Normal)
         self.selectedTag = self.tagTypes[indexPath.row]
+        if let previousCell = self.selectedCell{
+            previousCell.checkButton.setImage(UIImage(named: "no_check.png"), forState: UIControlState.Normal)
+        }
+        self.selectedCell = cell
     }
 
     // MARK: - Navigation

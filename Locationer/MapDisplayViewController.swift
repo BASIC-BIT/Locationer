@@ -21,7 +21,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     var locationManager : CLLocationManager? = nil
     var didFindMyLocation = false
     var holdDownMarkerOnMap = false
-    let defaultZoom : Float = 10.0
+    let defaultZoom : Float = 13.0
 
 
     
@@ -109,10 +109,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         if let locationToStart = detailLocationToAppearAt{
             let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
             self.mapView.camera = camera
@@ -123,7 +119,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             //FIXME: loads rose first then quickly changes to other location when data becomes available
             if let myLocation = self.mapView.myLocation{
                 self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: defaultZoom)
-
+                
                 println("I have a location")
             } else {
                 println("couldn't find location")
@@ -132,6 +128,11 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
                 self.mapView.camera = roseHulman
             }
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
         //FIXME markers dissapear and quickly reapear whenever loaded ; not as intended
         _markers = nil
         self.mapView.clear()
@@ -265,17 +266,23 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             CoreDataUtils.saveContext()
             marker.map = self.mapView
         }
-        self.quickSaveMarker?.map =  nil
         self.quickSaveMarker = nil
 
 
     }
     
     @IBAction func pressedGoToLastSaved(sender: AnyObject) {
-        if let qsmarker = self.quickSaveMarker{
-            self.mapView.camera = GMSCameraPosition.cameraWithLatitude(qsmarker.position.latitude, longitude: qsmarker.position.longitude, zoom: self.mapView.camera.zoom)
+        var locations = self.fetchedResultsController.sections![0].objects as! [Location]
+        locations.sort({ $0.dateAdded > $1.dateAdded})
+        if let firstLocation = locations.first{
+            let coordinate = CLLocationCoordinate2D(latitude: firstLocation.lat.doubleValue, longitude: firstLocation.lon.doubleValue)
+            let camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: defaultZoom)
+            self.mapView.camera = camera
         }
+
     }
+
+    
     @IBAction func pressedMenuButton(sender: AnyObject) {
         let ac = UIAlertController(title: "Choose a Map Type", message: nil, preferredStyle: .ActionSheet)
         let normalMapAction = UIAlertAction(title: "Normal Road Map", style: UIAlertActionStyle.Default) { (action : UIAlertAction!) -> Void in

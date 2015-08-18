@@ -48,6 +48,10 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
             let controllers = split.viewControllers
             self.locationDetailViewController = controllers[controllers.count-1].topViewController as? LocationDetailViewController
         }
+        self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "toggleEdit")
+    }
+    func toggleEdit(){
+        self.tableView.endEditing(!self.tableView.editing)
     }
 
     override func didReceiveMemoryWarning() {
