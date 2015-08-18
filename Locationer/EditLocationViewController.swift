@@ -26,6 +26,9 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     @IBOutlet weak var tagsField: UITextField!
     @IBOutlet weak var isFavoriteSwitch: UISwitch!
     @IBOutlet weak var tagsTableView: TagsTableView!
+    
+
+    
     //MARK: - Pressed Button Methods
     @IBAction func pressedAddTag(sender: AnyObject) {
         self.performSegueWithIdentifier(kShowAddTagIdentifier, sender: self)
@@ -43,24 +46,25 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         pressedSaveButton(self)
     }
     @IBAction func pressedSaveButton(sender: AnyObject) {
-        if let tag = selectedTag {
-            var loc1 : Location
-            if (isEditMode){
-                loc1 = location!
-                
-            } else {
-                loc1 = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Location
-                loc1.lat = marker!.position.latitude
-                loc1.lon = marker!.position.longitude
-            }
+        var loc1 : Location
+        if (isEditMode){
+            loc1 = location!
+            
+        } else {
+            loc1 = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Location
+            loc1.lat = marker!.position.latitude
+            loc1.lon = marker!.position.longitude
             loc1.name = nameField.text
             loc1.desc = descField.text
             loc1.isFavorite = NSNumber(bool: isFavoriteSwitch.on)
-            loc1.tag = tag
             loc1.dateAdded = NSDate()
-            CoreDataUtils.saveContext()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            if let tag = selectedTag {
+                loc1.tag = tag
+            }
         }
+        
+        CoreDataUtils.saveContext()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -107,6 +111,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         self.descField.delegate = self
         self.tagsTableView.editLocationViewController = self // don't need?
         self.tagsTableView.tag = 5
+
 
         let fields = [self.nameField, self.descField]
         Util.addBarToTextField(fields, view: self.view, controller: self)

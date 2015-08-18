@@ -2,7 +2,7 @@
 //  Location.swift
 //  Locationer
 //
-//  Created by CSSE Department on 8/9/15.
+//  Created by CSSE Department on 8/18/15.
 //  Copyright (c) 2015 Rose-Hulman. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ class Location: NSManagedObject {
     @NSManaged var lat: NSNumber
     @NSManaged var lon: NSNumber
     @NSManaged var name: String
+    @NSManaged var address: String?
     @NSManaged var tag: Tag?
 
 }

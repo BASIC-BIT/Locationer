@@ -18,6 +18,7 @@ class LocationDetailViewController: UIViewController {
     let kShowOnMapFromDetailSegueIdentifier = "showOnMapFromDetailSegueIdentifier"
     let kToEditLocationSegueIdentifier = "toEditLocationSegueIdentifier"
 
+    @IBOutlet weak var addressLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -87,6 +88,9 @@ class LocationDetailViewController: UIViewController {
             } else {
                 fl.text = trueText
             }
+        }
+        if let address = self.location?.address{
+            self.addressLabel.text = address
         }
     }
 

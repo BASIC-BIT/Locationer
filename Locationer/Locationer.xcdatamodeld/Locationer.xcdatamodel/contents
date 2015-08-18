@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Location" representedClassName="Locationer.Location" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -16,7 +17,7 @@
         <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Location" positionX="1332" positionY="-1345" width="128" height="148"/>
+        <element name="Location" positionX="1332" positionY="-1345" width="128" height="165"/>
         <element name="Tag" positionX="1512" positionY="-1111" width="128" height="105"/>
     </elements>
 </model>

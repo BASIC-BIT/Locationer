@@ -17,11 +17,14 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     var managedObjectContext: NSManagedObjectContext? = nil
     var lastPressedMarker : GMSMarker? = nil
     var quickSaveMarker : GMSMarker? = nil
-    var quickSaveMarkerIsFixed = false
     var detailLocationToAppearAt : CLLocationCoordinate2D? = nil
     var locationManager : CLLocationManager? = nil
     var didFindMyLocation = false
+    var holdDownMarkerOnMap = false
+    let defaultZoom : Float = 10.0
 
+
+    
 //    @IBOutlet weak var addressLabel: UILabel!
 //    
 //    @IBAction func geoCode(sender: AnyObject) {
@@ -30,44 +33,52 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
 //    }
     
 
-    @IBOutlet weak var addressInputTextView: UITextView!
+
+    @IBOutlet weak var addressInputTextField: UITextField!
     
     @IBAction func pressedGoToOnMap(sender: AnyObject) {
-        _forwardGeoCodeFromAddress(self.addressInputTextView.text)
+        _forwardGeoCodeFromAddress(self.addressInputTextField.text)
     }
     
-    func _forwardGeoCodeFromAddress(address : String){
+    func _forwardGeoCodeFromAddress(address : String) {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(address, completionHandler: { (placeMarkers:[AnyObject]!, error : NSError!) -> Void in
             var isFirstPlaceMarker = true
-            for placemarker in placeMarkers as! [CLPlacemark]{
-                if isFirstPlaceMarker{
-
-                    self.mapView.camera = GMSCameraPosition(target: placemarker.location.coordinate, zoom: self.mapView.camera.zoom, bearing: self.mapView.camera.bearing, viewingAngle: self.mapView.camera.bearing)
-
-                }
-                isFirstPlaceMarker = false
+            let aplaceMarkers = placeMarkers as! [CLPlacemark]
+            if let first = aplaceMarkers.first {
+                let camera = GMSCameraPosition.cameraWithTarget(first.location.coordinate, zoom: self.defaultZoom)
+                self.mapView.camera = camera
             }
         })
     }
-    
+//    func _forwardgeo(address : String)->GMSCameraPosition? {
+//        let geoCoder = CLGeocoder()
+//        geoCoder.geocodeAddressString(address, completionHandler: { (placeMarkers:[AnyObject]!, error : NSError!) -> Void in
+//            var isFirstPlaceMarker = true
+//            let aplaceMarkers = placeMarkers as! [CLPlacemark]
+//            if let placemark = aplaceMarkers.first{
+//                let cameraPosition : GMSCameraPosition? = GMSCameraPosition.cameraWithTarget(placemark.location.coordinate, zoom: 13)
+//                return cameraPosition
+//            } else {
+//                return
+//            }
+//        })
+//    }
+//    
     @IBOutlet weak var mapView: GMSMapView!
-    func _reverseGeoCodeCoordination(coordinate: CLLocationCoordinate2D) {
+    
+    var addressResultFromGeocode : String? = nil
+    func _reverseGeoCodeCoordination(coordinate: CLLocationCoordinate2D)->String?{
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(coordinate, completionHandler: { (response : GMSReverseGeocodeResponse!, error : NSError!) -> Void in
             if let address = response.firstResult(){
-                println("received address")
                 let lines = address.lines as! [String]
-                println("lines count is \(lines.count)")
-                println(lines)
-//                self.addressLabel.text = join("\n", lines)
-                
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-                })
-                
+                self.addressResultFromGeocode = join("\n", lines)
+            } else {
+                self.addressResultFromGeocode = nil
             }
         })
+        return self.addressResultFromGeocode
     }
     var markers : [GMSMarker] {
         if _markers != nil{
@@ -111,12 +122,13 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             println("not detail loc")
             //FIXME: loads rose first then quickly changes to other location when data becomes available
             if let myLocation = self.mapView.myLocation{
-                self.mapView.camera = GMSCameraPosition(target: myLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+                self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: defaultZoom)
+
                 println("I have a location")
             } else {
                 println("couldn't find location")
                 // to center at rose human
-                var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464, longitude: -87.324142, zoom: 15)
+                var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464, longitude: -87.324142, zoom: defaultZoom)
                 self.mapView.camera = roseHulman
             }
         }
@@ -128,10 +140,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
                 marker.map = self.mapView
             }
         }
-        
-        if(!self.quickSaveMarkerIsFixed){
-            _setQuickSaveMarker(self.mapView.camera)            
-        }
+    
 
         println("did appear")
     }
@@ -141,7 +150,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     }
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         let myLocation : CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
-        self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+        self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: defaultZoom)
         self.mapView.settings.myLocationButton = true
         
         didFindMyLocation = true
@@ -156,6 +165,11 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = self.mapView
+        var snippet = "Press save to save this marker! \n"
+        if let address = _reverseGeoCodeCoordination(coordinate){
+            snippet += address
+        }
+        marker.snippet = snippet
         self.lastPressedMarker = marker
     }
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
@@ -166,9 +180,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         _setQuickSaveMarker(position)
     }
     func _setQuickSaveMarker(position : GMSCameraPosition){
-        if(self.quickSaveMarkerIsFixed){
-            return
-        }
+
         let quickSaveMarker = GMSMarker()
         quickSaveMarker.icon = GMSMarker.markerImageWithColor(UIColor.blackColor())
         quickSaveMarker.position = position.target
@@ -176,12 +188,13 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         quickSaveMarker.snippet = "this is the position that will be saved by pressing quicksave"
         quickSaveMarker.map = self.mapView
         self.quickSaveMarker = quickSaveMarker
+        _reverseGeoCodeCoordination(quickSaveMarker.position)
     }
     func mapView(mapView: GMSMapView!, willMove gesture: Bool) {
-        if(!self.quickSaveMarkerIsFixed){
-            self.quickSaveMarker?.map = nil
-            self.quickSaveMarker = nil
-        }
+        //FIXME: change graphical bug
+        self.quickSaveMarker?.map = nil
+        self.quickSaveMarker = nil
+        
 
     }
 
@@ -194,7 +207,12 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             let markerLocation = CLLocationCoordinate2D(latitude: savedLocation.lat.doubleValue, longitude: savedLocation.lon.doubleValue)
             let marker = GMSMarker(position: markerLocation)
             marker.title = savedLocation.name
-            marker.snippet = savedLocation.desc
+            var snippetText = savedLocation.desc
+            if let address = savedLocation.address{
+                snippetText += "\n"
+                snippetText += address
+            }
+            marker.snippet = snippetText
             if let tag = savedLocation.tag{
                 marker.icon = GMSMarker.markerImageWithColor(Util.colorDictionary[tag.color])
 
@@ -205,13 +223,18 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             println("refreshed location with name \(savedLocation.name)")
         }
         // add qs marker to auto load marker database
-        if let qsmarker = self.quickSaveMarker{
-            if(self.quickSaveMarkerIsFixed){
-                markerArray.append(qsmarker)
-            }
-        }
         return markerArray
 
+    }
+    func _reloadMarkers(){
+        _fetchedResultsController = nil
+        _markers = nil
+        self.mapView.clear()
+        for marker in markers{
+            if marker.map == nil{
+                marker.map = self.mapView
+            }
+        }
     }
     // MARK: - Button Press Actions
     @IBOutlet weak var goToLastSavedButton: UIButton!
@@ -230,11 +253,22 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         }
     }
     @IBAction func pressedQuickSave(sender: AnyObject) {
-        if(self.quickSaveMarkerIsFixed){
-            self.quickSaveMarker?.map = nil
-            self.quickSaveMarker = nil
+        if let marker = self.quickSaveMarker{
+            let newLocation = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Location
+            newLocation.name = "Quick Saved Marker"
+            newLocation.desc = "Enter a description of this marker here"
+            newLocation.dateAdded = NSDate()
+            newLocation.lat = marker.position.latitude
+            newLocation.lon = marker.position.longitude
+            newLocation.address = _reverseGeoCodeCoordination(marker.position)
+            newLocation.isFavorite = NSNumber(bool: true)
+            CoreDataUtils.saveContext()
+            marker.map = self.mapView
         }
-        self.quickSaveMarkerIsFixed = !self.quickSaveMarkerIsFixed
+        self.quickSaveMarker?.map =  nil
+        self.quickSaveMarker = nil
+
+
     }
     
     @IBAction func pressedGoToLastSaved(sender: AnyObject) {
