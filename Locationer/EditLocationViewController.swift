@@ -10,8 +10,8 @@ import UIKit
 import CoreData
 import GoogleMaps
 
-//TODO: save tag to core data
-//!!!: How are we going to deal with people deleting tags that exist on other locations?
+
+
 class EditLocationViewController: UIViewController , NSFetchedResultsControllerDelegate , UITextFieldDelegate , UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
     let kTagCellIdentifier = "TagCellIdentifier"
     var location : Location?
@@ -98,7 +98,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
             self.isFavoriteSwitch.on = self.location!.isFavorite.boolValue
             _setSelectedTagFromLocation()
         }
-        //TODO: Make  gesture delegate should recieve touch so tableview doesn't get interfered with by gesture
+        //FIXME: Make  gesture delegate should recieve touch so tableview doesn't get interfered with by gesture
 //        var tap = UITapGestureRecognizer(target: self, action: "endEditing")
 //        tap.delegate = self
 //        self.view.addGestureRecognizer(tap)

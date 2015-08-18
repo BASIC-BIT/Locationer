@@ -323,7 +323,93 @@ Last Saved</string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EO-hr-rAX" userLabel="Map View" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="510"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVj-8Y-rSV">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="FaZ-9e-Gy1"/>
+                                            <constraint firstAttribute="height" constant="40" id="ZSZ-BA-UTW"/>
+                                        </constraints>
+                                        <state key="normal" title="goto">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="FaZ-9e-Gy1"/>
+                                                <exclude reference="ZSZ-BA-UTW"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="FaZ-9e-Gy1"/>
+                                                <include reference="ZSZ-BA-UTW"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="pressedGoToOnMap:" destination="7dX-Ng-ogN" eventType="touchUpInside" id="ZpP-mh-zO8"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qGW-AV-EWm">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="aHs-MQ-S9L"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="aHs-MQ-S9L"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="aHs-MQ-S9L"/>
+                                            </mask>
+                                        </variation>
+                                    </textView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VVj-8Y-rSV" secondAttribute="trailing" id="3ta-qg-8W6">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstItem="qGW-AV-EWm" firstAttribute="leading" secondItem="2EO-hr-rAX" secondAttribute="leading" id="CEN-YQ-5W3"/>
+                                    <constraint firstItem="VVj-8Y-rSV" firstAttribute="top" secondItem="2EO-hr-rAX" secondAttribute="top" id="Kpx-Fq-a37">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="49"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="VVj-8Y-rSV" secondAttribute="trailing" id="UpF-Yx-f04"/>
+                                    <constraint firstAttribute="trailing" secondItem="qGW-AV-EWm" secondAttribute="trailing" id="W1j-Se-ffo"/>
+                                    <constraint firstItem="qGW-AV-EWm" firstAttribute="top" secondItem="2EO-hr-rAX" secondAttribute="top" id="nNT-Fc-NQI"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="VVj-8Y-rSV"/>
+                                        <exclude reference="qGW-AV-EWm"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="CEN-YQ-5W3"/>
+                                        <exclude reference="W1j-Se-ffo"/>
+                                        <exclude reference="nNT-Fc-NQI"/>
+                                        <exclude reference="3ta-qg-8W6"/>
+                                        <exclude reference="Kpx-Fq-a37"/>
+                                        <exclude reference="UpF-Yx-f04"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="VVj-8Y-rSV"/>
+                                        <include reference="qGW-AV-EWm"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="CEN-YQ-5W3"/>
+                                        <include reference="W1j-Se-ffo"/>
+                                        <include reference="nNT-Fc-NQI"/>
+                                        <include reference="3ta-qg-8W6"/>
+                                        <include reference="Kpx-Fq-a37"/>
+                                        <include reference="UpF-Yx-f04"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -343,14 +429,15 @@ Last Saved</string>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="f6W-Md-DZh">
-                        <barButtonItem key="rightBarButtonItem" image="ic_menu_bars.png" id="imu-n9-hbT">
+                    <navigationItem key="navigationItem" title="Map" id="oTr-3m-IpR">
+                        <barButtonItem key="rightBarButtonItem" image="ic_menu_bars.png" id="g3X-nU-im2">
                             <connections>
-                                <action selector="pressedMenuButton:" destination="7dX-Ng-ogN" id="0b1-3k-SIs"/>
+                                <action selector="pressedMenuButton:" destination="7dX-Ng-ogN" id="Ko6-Ig-pR0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addressInputTextView" destination="qGW-AV-EWm" id="Euf-2S-7HH"/>
                         <outlet property="goToLastSavedButton" destination="HzT-Jc-Gh1" id="UPe-n2-pKt"/>
                         <outlet property="mapView" destination="2EO-hr-rAX" id="R7i-fg-Njm"/>
                         <outlet property="quickSaveButton" destination="QQQ-aS-HNg" id="YpC-lF-4jG"/>
@@ -393,6 +480,15 @@ Last Saved</string>
                                         <include reference="3Yh-QK-xbp"/>
                                     </mask>
                                 </variation>
+                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="175" y="76" width="250" height="30"/>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="175" y="76" width="250" height="30"/>
+                                </variation>
+                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="175" y="76" width="250" height="30"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="vGj-Sx-pVJ"/>
@@ -417,6 +513,15 @@ Last Saved</string>
                                     <mask key="constraints">
                                         <include reference="VRk-Cf-v9L"/>
                                     </mask>
+                                </variation>
+                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="175" y="126" width="250" height="30"/>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="175" y="126" width="250" height="30"/>
+                                </variation>
+                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="175" y="126" width="250" height="30"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
@@ -488,6 +593,15 @@ Last Saved</string>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="heightClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="widthClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="EyR-KB-meV" id="Fhe-ME-Zkf"/>
                                     <outlet property="delegate" destination="EyR-KB-meV" id="ypi-3h-Jsn"/>
@@ -621,6 +735,8 @@ Last Saved</string>
                                 <exclude reference="xSc-OB-nXP"/>
                                 <exclude reference="xnh-yo-oUD"/>
                                 <exclude reference="yQr-1J-PET"/>
+                                <exclude reference="9kn-cc-bVn"/>
+                                <exclude reference="BK9-Q9-Npz"/>
                                 <exclude reference="0JV-TI-M5S"/>
                                 <exclude reference="3sC-2z-klD"/>
                                 <exclude reference="JI8-C4-scM"/>
@@ -639,21 +755,19 @@ Last Saved</string>
                                 <exclude reference="mfs-bc-HEE"/>
                                 <exclude reference="tYj-pJ-BGZ"/>
                                 <exclude reference="ypl-8J-xpq"/>
-                                <exclude reference="9kn-cc-bVn"/>
-                                <exclude reference="BK9-Q9-Npz"/>
                                 <exclude reference="NA4-JU-X0q"/>
                                 <exclude reference="a8c-98-N8Z"/>
                                 <exclude reference="uKJ-0Q-sm0"/>
                                 <exclude reference="Ru8-5X-vFG"/>
+                                <exclude reference="K4s-Ob-ol3"/>
+                                <exclude reference="SDg-c0-d3x"/>
+                                <exclude reference="eO2-KE-Kwc"/>
                                 <exclude reference="2hm-3L-pB8"/>
                                 <exclude reference="Zy1-qC-XBm"/>
                                 <exclude reference="d10-WW-0XW"/>
                                 <exclude reference="edR-xd-dim"/>
                                 <exclude reference="gck-b3-byd"/>
                                 <exclude reference="vNO-GS-Pti"/>
-                                <exclude reference="K4s-Ob-ol3"/>
-                                <exclude reference="SDg-c0-d3x"/>
-                                <exclude reference="eO2-KE-Kwc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -666,6 +780,7 @@ Last Saved</string>
                                 <include reference="ESP-Er-Hph"/>
                                 <include reference="xnh-yo-oUD"/>
                                 <include reference="yQr-1J-PET"/>
+                                <include reference="BK9-Q9-Npz"/>
                                 <include reference="0JV-TI-M5S"/>
                                 <include reference="3sC-2z-klD"/>
                                 <include reference="LBS-gj-5yi"/>
@@ -676,13 +791,12 @@ Last Saved</string>
                                 <include reference="vRg-W1-Wqh"/>
                                 <include reference="mfs-bc-HEE"/>
                                 <include reference="tYj-pJ-BGZ"/>
-                                <include reference="BK9-Q9-Npz"/>
                                 <include reference="a8c-98-N8Z"/>
                                 <include reference="uKJ-0Q-sm0"/>
                                 <include reference="Ru8-5X-vFG"/>
-                                <include reference="gck-b3-byd"/>
                                 <include reference="K4s-Ob-ol3"/>
                                 <include reference="SDg-c0-d3x"/>
+                                <include reference="gck-b3-byd"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -696,6 +810,7 @@ Last Saved</string>
                                 <include reference="Nkh-P0-w6x"/>
                                 <include reference="qhg-0i-6aT"/>
                                 <include reference="xSc-OB-nXP"/>
+                                <include reference="9kn-cc-bVn"/>
                                 <include reference="JI8-C4-scM"/>
                                 <include reference="Yym-TK-Vqv"/>
                                 <include reference="dIT-7r-vg4"/>
@@ -704,14 +819,13 @@ Last Saved</string>
                                 <include reference="xj9-Q2-h59"/>
                                 <include reference="TIJ-I6-n5Z"/>
                                 <include reference="ypl-8J-xpq"/>
-                                <include reference="9kn-cc-bVn"/>
                                 <include reference="NA4-JU-X0q"/>
+                                <include reference="eO2-KE-Kwc"/>
                                 <include reference="2hm-3L-pB8"/>
                                 <include reference="Zy1-qC-XBm"/>
                                 <include reference="d10-WW-0XW"/>
                                 <include reference="edR-xd-dim"/>
                                 <include reference="vNO-GS-Pti"/>
-                                <include reference="eO2-KE-Kwc"/>
                             </mask>
                         </variation>
                     </view>
@@ -765,9 +879,6 @@ Last Saved</string>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="190" y="325" width="40" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="pressedClose:" destination="sDs-Qf-OML" eventType="touchUpInside" id="Vt3-Ja-Vfp"/>
                                 </connections>
@@ -777,9 +888,6 @@ Last Saved</string>
                                 <state key="normal" title="save new tag">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="345" y="325" width="91" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="pressedSaveTag:" destination="sDs-Qf-OML" eventType="touchUpInside" id="RFu-4N-Ogb"/>
                                 </connections>

@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-//TODO: Make this vc prettier. It's bare bones.
+
 class AddTagViewController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource{
     var tagTypes : [Tag]? = nil
     var colorNames : [String] = []

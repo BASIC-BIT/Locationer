@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import GoogleMaps
 
-class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedResultsControllerDelegate {
+class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedResultsControllerDelegate , CLLocationManagerDelegate{
     
     let saveSegueIdentifier = "saveSegueIdentifier"
     let tableSegueIdentifier = "tableSegueIdentifier"
@@ -19,10 +19,56 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     var quickSaveMarker : GMSMarker? = nil
     var quickSaveMarkerIsFixed = false
     var detailLocationToAppearAt : CLLocationCoordinate2D? = nil
+    var locationManager : CLLocationManager? = nil
+    var didFindMyLocation = false
 
+//    @IBOutlet weak var addressLabel: UILabel!
+//    
+//    @IBAction func geoCode(sender: AnyObject) {
+//
+//        _reverseGeoCodeCoordination(self.mapView.camera.target)
+//    }
+    
+
+    @IBOutlet weak var addressInputTextView: UITextView!
+    
+    @IBAction func pressedGoToOnMap(sender: AnyObject) {
+        _forwardGeoCodeFromAddress(self.addressInputTextView.text)
+    }
+    
+    func _forwardGeoCodeFromAddress(address : String){
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(address, completionHandler: { (placeMarkers:[AnyObject]!, error : NSError!) -> Void in
+            var isFirstPlaceMarker = true
+            for placemarker in placeMarkers as! [CLPlacemark]{
+                if isFirstPlaceMarker{
+
+                    self.mapView.camera = GMSCameraPosition(target: placemarker.location.coordinate, zoom: self.mapView.camera.zoom, bearing: self.mapView.camera.bearing, viewingAngle: self.mapView.camera.bearing)
+
+                }
+                isFirstPlaceMarker = false
+            }
+        })
+    }
     
     @IBOutlet weak var mapView: GMSMapView!
-
+    func _reverseGeoCodeCoordination(coordinate: CLLocationCoordinate2D) {
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(coordinate, completionHandler: { (response : GMSReverseGeocodeResponse!, error : NSError!) -> Void in
+            if let address = response.firstResult(){
+                println("received address")
+                let lines = address.lines as! [String]
+                println("lines count is \(lines.count)")
+                println(lines)
+//                self.addressLabel.text = join("\n", lines)
+                
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                })
+                
+            }
+        })
+    }
     var markers : [GMSMarker] {
         if _markers != nil{
             return _markers!
@@ -38,22 +84,43 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         self.goToLastSavedButton.titleLabel?.numberOfLines = 0
         self.quickSaveButton.titleLabel?.numberOfLines = 0
 //        self.goToLastSavedButton.titleLabel?.text = "go to \n last saved"
+
+        // set up mapview
+        self.mapView.delegate = self
+
+        self.mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+
+        // set up location manager
+        self.locationManager = CLLocationManager()
+        self.locationManager?.delegate = self
+        self.locationManager?.requestWhenInUseAuthorization()
+        println("Void did load")
+        
+
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if let locationToStart = detailLocationToAppearAt{
             let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
             self.mapView.camera = camera
             self.detailLocationToAppearAt = nil
         } else {
-            var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464,
-            longitude: -87.324142, zoom: 15)
-            self.mapView.camera = roseHulman
+            // to center at user
+            println("not detail loc")
+            //FIXME: loads rose first then quickly changes to other location when data becomes available
+            if let myLocation = self.mapView.myLocation{
+                self.mapView.camera = GMSCameraPosition(target: myLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+                println("I have a location")
+            } else {
+                println("couldn't find location")
+                // to center at rose human
+                var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464, longitude: -87.324142, zoom: 15)
+                self.mapView.camera = roseHulman
+            }
         }
-        self.mapView.delegate = self
-        println("Void did load")
-
-        // Do any additional setup after loading the view.
-    }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        //FIXME markers dissapear and quickly reapear whenever loaded ; not as intended
         _markers = nil
         self.mapView.clear()
         for marker in markers{
@@ -61,13 +128,24 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
                 marker.map = self.mapView
             }
         }
+        
         if(!self.quickSaveMarkerIsFixed){
             _setQuickSaveMarker(self.mapView.camera)            
         }
 
         println("did appear")
     }
-    
+    // MARK: - location delegate methods
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        self.mapView.myLocationEnabled = true
+    }
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        let myLocation : CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
+        self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+        self.mapView.settings.myLocationButton = true
+        
+        didFindMyLocation = true
+    }
     // MARK: - mapView functions
     func mapView(mapView: GMSMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
         println("did hold")
