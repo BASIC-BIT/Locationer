@@ -12,11 +12,6 @@ class Util: NSObject {
 
     class func addBarToTextField(fields : [UITextField!], view : UIView!, controller : UIViewController){
         let hide = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: view, action: "endEditing:")
-//        if let classedView = view as? EditLocationViewController {
-//            subClassView = view as! EditLocationViewController
-//        }else if view is AddTagViewController! {
-//            subClassView = view as! AddTagViewController
-//        }
         let save = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: controller, action: "pressedSaveKeyboardButton")
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         let toolbar = UIToolbar(frame: CGRectMake(0, 0, view.bounds.size.width, 44.0))

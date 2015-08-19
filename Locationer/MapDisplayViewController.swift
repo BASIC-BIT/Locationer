@@ -22,23 +22,15 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     var didFindMyLocation = false
     var holdDownMarkerOnMap = false
     var hideQuickSaveUntilMove = false
-    let defaultZoom : Float = 13.0
-    
+    let defaultZoom : Float = 15.0
 
-
-    
-//    @IBOutlet weak var addressLabel: UILabel!
-//    
-//    @IBAction func geoCode(sender: AnyObject) {
-//
-//        _reverseGeoCodeCoordination(self.mapView.camera.target)
-//    }
-    
 
 
     @IBOutlet weak var addressInputTextField: UITextField!
+    @IBOutlet weak var mapView: GMSMapView!
     
     @IBAction func pressedGoToOnMap(sender: AnyObject) {
+        self.endEditing()
         _forwardGeoCodeFromAddress(self.addressInputTextField.text)
     }
     
@@ -53,34 +45,22 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             }
         })
     }
-//    func _forwardgeo(address : String)->GMSCameraPosition? {
-//        let geoCoder = CLGeocoder()
-//        geoCoder.geocodeAddressString(address, completionHandler: { (placeMarkers:[AnyObject]!, error : NSError!) -> Void in
-//            var isFirstPlaceMarker = true
-//            let aplaceMarkers = placeMarkers as! [CLPlacemark]
-//            if let placemark = aplaceMarkers.first{
-//                let cameraPosition : GMSCameraPosition? = GMSCameraPosition.cameraWithTarget(placemark.location.coordinate, zoom: 13)
-//                return cameraPosition
-//            } else {
-//                return
-//            }
-//        })
-//    }
-//    
-    @IBOutlet weak var mapView: GMSMapView!
     
-    var addressResultFromGeocode : String? = nil
+    var addressResultsFromGeoCode : String?
     func _reverseGeoCodeCoordination(coordinate: CLLocationCoordinate2D)->String?{
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(coordinate, completionHandler: { (response : GMSReverseGeocodeResponse!, error : NSError!) -> Void in
             if let address = response.firstResult(){
+                println("found result")
                 let lines = address.lines as! [String]
-                self.addressResultFromGeocode = join("\n", lines)
+
+                self.addressResultsFromGeoCode = join("\n", lines)
             } else {
-                self.addressResultFromGeocode = nil
+                self.addressResultsFromGeoCode = nil
             }
         })
-        return self.addressResultFromGeocode
+
+        return self.addressResultsFromGeoCode
     }
     var markers : [GMSMarker] {
         if _markers != nil{
@@ -130,6 +110,14 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
                 self.mapView.camera = roseHulman
             }
         }
+        let hide = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: view, action: "endEditing:")
+        let search = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "pressedGoToOnMap:")
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let toolbar = UIToolbar(frame: CGRectMake(0, 0, view.bounds.size.width, 44.0))
+        toolbar.items = [search, flexSpace, hide]
+        self.addressInputTextField.inputAccessoryView = toolbar
+        var tap = UITapGestureRecognizer(target: self.mapView, action: "endEditing")
+        self.mapView.addGestureRecognizer(tap)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -170,6 +158,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         marker.map = self.mapView
         var snippet = "Press save to save this marker! \n"
         if let address = _reverseGeoCodeCoordination(coordinate){
+            println("found address")
             snippet += address
         }
         marker.snippet = snippet
@@ -194,7 +183,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         self.quickSaveMarker = quickSaveMarker
         _reverseGeoCodeCoordination(quickSaveMarker.position)
         //TODO: make quick save not over lap other markers when they appear initially
-        self.hideQuickSaveUntilMove = true
     }
     func mapView(mapView: GMSMapView!, willMove gesture: Bool) {
         //FIXME: change graphical bug
@@ -273,8 +261,15 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             newLocation.isFavorite = NSNumber(bool: true)
             CoreDataUtils.saveContext()
             marker.map = self.mapView
+            _markers = nil
+            for marker in markers{
+                if marker.map == nil{
+                    marker.map = self.mapView
+                }
+            }
         }
-        self.quickSaveMarker = nil
+        self.quickSaveMarker?.map = nil
+        self.hideQuickSaveUntilMove = true
 
 
     }
@@ -365,7 +360,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == saveSegueIdentifier{
-            (segue.destinationViewController as! EditLocationViewController).marker = (self.lastPressedMarker != nil) ? self.lastPressedMarker : self.quickSaveMarker
+            let vc = segue.destinationViewController as! EditLocationViewController
+            vc.marker = (self.lastPressedMarker != nil) ? self.lastPressedMarker : self.quickSaveMarker
+            vc.addressFromGeoCoding = self.addressResultsFromGeoCode
         }
         if segue.identifier == tableSegueIdentifier{
             (segue.destinationViewController as! LocationsTableViewController).markers = self.markers

@@ -21,6 +21,7 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     var selectedTag : Tag?
     var selectedCell : TagTypesTableViewCell?
     let kShowAddTagIdentifier = "ShowAddTagIdentifier"
+    var addressFromGeoCoding : String? = nil
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var descField: UITextField!
@@ -58,6 +59,9 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
             loc1.lat = marker!.position.latitude
             loc1.lon = marker!.position.longitude
             loc1.dateAdded = NSDate()
+        }
+        if let address = self.addressFromGeoCoding{
+            loc1.address = address
         }
         loc1.name = nameField.text
         loc1.desc = descField.text

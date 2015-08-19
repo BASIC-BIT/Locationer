@@ -111,7 +111,8 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
             let count = self.markers?.count
             if let markerArray = self.markers{
                 for marker in markerArray{
-                    if marker.title == location.name{
+                    println("location \(location.name) with lat \(location.lat.doubleValue) and marker lat of \(marker.position.latitude)")
+                    if (location.lat.doubleValue == marker.position.latitude) && (location.lon.doubleValue == marker.position.longitude){
                         marker.map = nil
                     }
                 }
