@@ -259,6 +259,9 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         println("commit")
         if editingStyle == .Delete {
             let TagToDelete = tagTypes[indexPath.row]
+            if TagToDelete == self.selectedTag {
+                self.selectedTag = nil
+            }
             self._fetchedResultsController = nil
             for aLocation in self.fetchedResultsController.sections![0].objects as! [Location]{
                 if aLocation.tag == TagToDelete{

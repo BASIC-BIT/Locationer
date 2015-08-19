@@ -90,26 +90,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         println("Void did load")
         
 
-        // Do any additional setup after loading the view.
-        if let locationToStart = detailLocationToAppearAt{
-            let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
-            self.mapView.camera = camera
-            self.detailLocationToAppearAt = nil
-        } else {
-            // to center at user
-            println("not detail loc")
-            //FIXME: loads rose first then quickly changes to other location when data becomes available
-            if let myLocation = self.mapView.myLocation{
-                self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: defaultZoom)
-                
-                println("I have a location")
-            } else {
-                println("couldn't find location")
-                // to center at rose human
-                var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464, longitude: -87.324142, zoom: defaultZoom)
-                self.mapView.camera = roseHulman
-            }
-        }
+
         let hide = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: view, action: "endEditing:")
         let search = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "pressedGoToOnMap:")
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
@@ -128,6 +109,27 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         for marker in markers{
             if marker.map == nil{
                 marker.map = self.mapView
+            }
+        }
+        
+        // Do any additional setup after loading the view.
+        if let locationToStart = detailLocationToAppearAt{
+            let camera = GMSCameraPosition.cameraWithLatitude(locationToStart.latitude, longitude: locationToStart.longitude, zoom: 15)
+            self.mapView.camera = camera
+            self.detailLocationToAppearAt = nil
+        } else {
+            // to center at user
+            println("not detail loc")
+            //FIXME: loads rose first then quickly changes to other location when data becomes available
+            if let myLocation = self.mapView.myLocation{
+                self.mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: defaultZoom)
+                
+                println("I have a location")
+            } else {
+                println("couldn't find location")
+                // to center at rose human
+                var roseHulman = GMSCameraPosition.cameraWithLatitude(39.483464, longitude: -87.324142, zoom: defaultZoom)
+                self.mapView.camera = roseHulman
             }
         }
     
