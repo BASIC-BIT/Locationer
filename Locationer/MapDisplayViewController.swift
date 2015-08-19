@@ -123,7 +123,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        //FIXME markers dissapear and quickly reapear whenever loaded ; not as intended
         _markers = nil
 //        self.mapView.clear()
         for marker in markers{
@@ -185,7 +184,6 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         //TODO: make quick save not over lap other markers when they appear initially
     }
     func mapView(mapView: GMSMapView!, willMove gesture: Bool) {
-        //FIXME: change graphical bug
         self.quickSaveMarker?.map = nil
         self.quickSaveMarker = nil
         self.hideQuickSaveUntilMove = false
@@ -213,7 +211,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
 
             }
         
-            marker.appearAnimation = kGMSMarkerAnimationPop
+            marker.appearAnimation = kGMSMarkerAnimationNone
             markerArray.append(marker)
             println("refreshed location with name \(savedLocation.name)")
         }
@@ -259,6 +257,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             newLocation.lon = marker.position.longitude
             newLocation.address = _reverseGeoCodeCoordination(marker.position)
             newLocation.isFavorite = NSNumber(bool: true)
+            _reverseGeoCodeCoordination(marker.position)
             CoreDataUtils.saveContext()
             marker.map = self.mapView
             _markers = nil
