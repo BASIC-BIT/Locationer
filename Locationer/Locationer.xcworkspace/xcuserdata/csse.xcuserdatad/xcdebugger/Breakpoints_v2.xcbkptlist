@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapDisplayViewController.swift"
-            timestampString = "461575775.691348"
+            timestampString = "461639452.757092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "_forwardGeoCodeFromAddress(_:)"
             landmarkType = "5">
          </BreakpointContent>

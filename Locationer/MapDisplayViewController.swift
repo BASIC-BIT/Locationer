@@ -21,7 +21,9 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     var locationManager : CLLocationManager? = nil
     var didFindMyLocation = false
     var holdDownMarkerOnMap = false
+    var hideQuickSaveUntilMove = false
     let defaultZoom : Float = 13.0
+    
 
 
     
@@ -135,7 +137,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
 
         //FIXME markers dissapear and quickly reapear whenever loaded ; not as intended
         _markers = nil
-        self.mapView.clear()
+//        self.mapView.clear()
         for marker in markers{
             if marker.map == nil{
                 marker.map = self.mapView
@@ -178,10 +180,11 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         return true
     }
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-        _setQuickSaveMarker(position)
+        if(!self.hideQuickSaveUntilMove){
+            _setQuickSaveMarker(position)
+        }
     }
     func _setQuickSaveMarker(position : GMSCameraPosition){
-
         let quickSaveMarker = GMSMarker()
         quickSaveMarker.icon = GMSMarker.markerImageWithColor(UIColor.blackColor())
         quickSaveMarker.position = position.target
@@ -190,11 +193,14 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
         quickSaveMarker.map = self.mapView
         self.quickSaveMarker = quickSaveMarker
         _reverseGeoCodeCoordination(quickSaveMarker.position)
+        //TODO: make quick save not over lap other markers when they appear initially
+        self.hideQuickSaveUntilMove = true
     }
     func mapView(mapView: GMSMapView!, willMove gesture: Bool) {
         //FIXME: change graphical bug
         self.quickSaveMarker?.map = nil
         self.quickSaveMarker = nil
+        self.hideQuickSaveUntilMove = false
         
 
     }
@@ -249,6 +255,8 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
     @IBAction func pressedSaveButton(sender: AnyObject) {
         if let validMarker =  self.lastPressedMarker{
             self.performSegueWithIdentifier(saveSegueIdentifier, sender: self)
+            self.lastPressedMarker?.map = nil
+            self.lastPressedMarker = nil
         } else if let validMarker = self.quickSaveMarker{
             self.performSegueWithIdentifier(saveSegueIdentifier, sender: self)
         }
@@ -278,6 +286,7 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             let coordinate = CLLocationCoordinate2D(latitude: firstLocation.lat.doubleValue, longitude: firstLocation.lon.doubleValue)
             let camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: defaultZoom)
             self.mapView.camera = camera
+            self.hideQuickSaveUntilMove = true
         }
 
     }
@@ -359,8 +368,8 @@ class MapDisplayViewController: UIViewController, GMSMapViewDelegate, NSFetchedR
             (segue.destinationViewController as! EditLocationViewController).marker = (self.lastPressedMarker != nil) ? self.lastPressedMarker : self.quickSaveMarker
         }
         if segue.identifier == tableSegueIdentifier{
-//            (segue.destinationViewController as! LocationsTableViewController).navigationItem = self.navigationItem
-        }
+            (segue.destinationViewController as! LocationsTableViewController).markers = self.markers
+    }
     }
 
 }

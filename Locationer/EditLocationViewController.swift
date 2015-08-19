@@ -49,17 +49,21 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
     @IBAction func pressedSaveButton(sender: AnyObject) {
         var loc1 : Location
         if (isEditMode){
+            // if update
             loc1 = location!
             
         } else {
+            // if initialize
             loc1 = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Location
             loc1.lat = marker!.position.latitude
             loc1.lon = marker!.position.longitude
-            loc1.name = nameField.text
-            loc1.desc = descField.text
-            loc1.isFavorite = NSNumber(bool: isFavoriteSwitch.on)
             loc1.dateAdded = NSDate()
         }
+        loc1.name = nameField.text
+        loc1.desc = descField.text
+        loc1.isFavorite = NSNumber(bool: isFavoriteSwitch.on)
+
+        
         if let tag = selectedTag {
             loc1.tag = tag
         }
@@ -293,8 +297,11 @@ class EditLocationViewController: UIViewController , NSFetchedResultsControllerD
         let cell = self.tagsTableView.cellForRowAtIndexPath(indexPath) as! TagTypesTableViewCell
         cell.checkButton.setImage(UIImage(named: "check.png"), forState: UIControlState.Normal)
         self.selectedTag = self.tagTypes[indexPath.row]
+
         if let previousCell = self.selectedCell{
-            previousCell.checkButton.setImage(UIImage(named: "no_check.png"), forState: UIControlState.Normal)
+            if(previousCell != cell){
+                previousCell.checkButton.setImage(UIImage(named: "no_check.png"), forState: UIControlState.Normal)
+            }
         }
         self.selectedCell = cell
     }

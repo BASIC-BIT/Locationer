@@ -8,15 +8,15 @@
 
 import UIKit
 import CoreData
-
+import GoogleMaps
 
 class LocationsTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     var locationDetailViewController: LocationDetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-    
+    var markers : [GMSMarker]?
     let klocationCellIdentifier = "LocationCellIdentifier"
-    
+
     override func viewDidAppear(animated: Bool) {
 //        let loc1 : Location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: CoreDataUtils.managedObjectContext()) as! Location
 //        loc1.name = "Parking Spot"
@@ -70,20 +70,6 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
         }
     }
 
-//    func insertNewObject(sender: AnyObject) {
-////        let context = self.fetchedResultsController.managedObjectContext
-//        let context = CoreDataUtils.managedObjectContext()
-//        let location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: context) as! Location
-//        
-//
-//        // If appropriate, configure the new managed object.
-//        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-////        newManagedObject.setValue(NSDate(), forKey: "Location")
-//        
-//        // Save the context.
-//        CoreDataUtils.saveContext()
-//    }
-
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -121,6 +107,15 @@ class LocationsTableViewController: UITableViewController, NSFetchedResultsContr
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
+            let location = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            let count = self.markers?.count
+            if let markerArray = self.markers{
+                for marker in markerArray{
+                    if marker.title == location.name{
+                        marker.map = nil
+                    }
+                }
+            }
             context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
                 
             var error: NSError? = nil

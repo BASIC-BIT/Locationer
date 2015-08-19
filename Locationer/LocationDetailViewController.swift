@@ -24,6 +24,7 @@ class LocationDetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "pressedEdit:")
+        self.addressLabel.text = ""
         
     }
     override func viewDidAppear(animated: Bool) {
