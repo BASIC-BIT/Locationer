@@ -1,2 +1,2 @@
 # Locationer
-Rose-Hulman CSSE484 Project
+Rose-Hulman CSSE484 iOS Development Project
